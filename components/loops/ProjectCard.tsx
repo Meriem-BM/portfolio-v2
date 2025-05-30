@@ -28,7 +28,7 @@ export const ProjectCard = ({
   };
   return (
     <Card
-      className="bg-black/50 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 cursor-pointer group"
+      className="bg-black/50 border border-white/10 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 cursor-pointer group h-full"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
