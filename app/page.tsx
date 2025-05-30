@@ -1,31 +1,20 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Github, Twitter, MessageCircle, Zap, ArrowRight } from "lucide-react";
+import { Github, Twitter, MessageCircle, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Geist } from "next/font/google";
+import StatusBar from "@/components/StatusBar";
+import ExploreButton from "@/components/ExploreButton";
+import ContactButton from "@/components/ContactButton";
+import NavBar from "@/components/NavBar";
+
+const geist = Geist({
+  subsets: ["latin"],
+});
 
 export default function HomePage() {
-  const [currentTime, setCurrentTime] = useState("");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setCurrentTime(
-        now.toLocaleTimeString("en-US", {
-          hour12: false,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-        })
-      );
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -76,48 +65,24 @@ export default function HomePage() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-10 p-6 flex justify-between items-center">
-        <div className="font-mono text-sm text-green-400">
-          [{currentTime}] SYSTEM_ACTIVE
-        </div>
-        <div className="flex gap-6">
-          <Link
-            href="/loops"
-            className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
-          >
-            LOOPS
-          </Link>
-          <Link
-            href="/logs"
-            className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
-          >
-            LOGS
-          </Link>
-          <Link
-            href="/trace"
-            className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
-          >
-            TRACE
-          </Link>
-          <Link
-            href="/ping"
-            className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
-          >
-            PING
-          </Link>
-        </div>
-      </nav>
+      <NavBar />
 
       {/* Main content */}
       <main className="relative z-10 flex flex-col items-center justify-center min-h-[80vh] px-6">
-        <div className="text-center max-w-4xl">
+        <div className="text-center max-w-6xl">
           {/* Glitchy greeting */}
           <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-black mb-4 glitch-text">
-              HEY, I'M
-            </h1>
-            <h1 className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
-              MERIEM
+            <div className="mb-6 inline-block">
+              <div className="px-4 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                <span className="text-emerald-400 font-mono text-sm">
+                  Blockchain SWE
+                </span>
+              </div>
+            </div>
+            <h1
+              className={`text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-purple-400 uppercase to-pink-400 bg-clip-text text-transparent animate-pulse ${geist.className}`}
+            >
+              Meriem B.
             </h1>
           </div>
 
@@ -132,6 +97,9 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <Button
               variant="outline"
+              onClick={() =>
+                window.open("https://github.com/Meriem-BM", "_blank")
+              }
               className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 font-mono"
             >
               <Github className="w-4 h-4 mr-2" />
@@ -139,6 +107,9 @@ export default function HomePage() {
             </Button>
             <Button
               variant="outline"
+              onClick={() =>
+                window.open("https://farcaster.com/meriembarhoumi", "_blank")
+              }
               className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 font-mono"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
@@ -146,6 +117,9 @@ export default function HomePage() {
             </Button>
             <Button
               variant="outline"
+              onClick={() =>
+                window.open("https://lens.xyz/meriembarhoumi", "_blank")
+              }
               className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10 font-mono"
             >
               <Zap className="w-4 h-4 mr-2" />
@@ -153,6 +127,9 @@ export default function HomePage() {
             </Button>
             <Button
               variant="outline"
+              onClick={() =>
+                window.open("https://x.com/meriembarhoumi", "_blank")
+              }
               className="border-green-500/50 text-green-400 hover:bg-green-500/10 font-mono"
             >
               <Twitter className="w-4 h-4 mr-2" />
@@ -161,21 +138,16 @@ export default function HomePage() {
           </div>
 
           {/* CTA */}
-          <Link href="/loops">
-            <Button className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-purple-500 hover:to-pink-500 text-white font-mono text-lg px-8 py-4 transition-all duration-300 transform hover:scale-105">
-              EXPLORE_WORK
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
+          <div className="flex justify-center gap-12 mt-24">
+            <ExploreButton />
+            <ContactButton />
+          </div>
         </div>
       </main>
 
       {/* Footer status */}
       <footer className="relative z-10 p-6 text-center">
-        <div className="font-mono text-xs text-white/40">
-          STATUS: ONLINE | LOCATION: EARTH | STACK: NEXT.JS + NESTJS + REACT +
-          SOLIDITY + RUST + TYPESCRIPT
-        </div>
+        <StatusBar />
       </footer>
     </div>
   );
