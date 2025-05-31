@@ -185,7 +185,7 @@ export default function PingPage() {
                   <Zap className="w-12 h-12 mx-auto mb-4 text-green-400" />
                   <h3 className="text-xl font-bold text-green-400 mb-2">MESSAGE_SENT</h3>
                   <p className="text-white/70 font-mono text-sm">
-                    Connection established. I'll respond within 24 hours.
+                    Connection established. I&apos;ll respond within 24 hours.
                   </p>
                 </CardContent>
               </Card>

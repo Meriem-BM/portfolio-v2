@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { ArrowLeft, Award, Users, Code } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowLeft, Award, Users, Code } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const timelineEvents = [
   {
@@ -57,12 +57,18 @@ const timelineEvents = [
     tech: ["React", "Node.js", "MongoDB"],
     icon: Code,
   },
-]
+];
 
-const communities = ["Developer DAO", "Buildspace", "ETHGlobal", "Farcaster", "Lens Protocol"]
+const communities = [
+  "Developer DAO",
+  "Buildspace",
+  "ETHGlobal",
+  "Farcaster",
+  "Lens Protocol",
+];
 
 export default function TracePage() {
-  const [hoveredEvent, setHoveredEvent] = useState<number | null>(null)
+  const [hoveredEvent, setHoveredEvent] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-black text-white relative">
@@ -108,7 +114,9 @@ export default function TracePage() {
                 TRACED
               </div>
               <span className="text-white/40">|</span>
-              <span className="text-white/60">{timelineEvents.length} MILESTONES</span>
+              <span className="text-white/60">
+                {timelineEvents.length} MILESTONES
+              </span>
             </div>
           </div>
 
@@ -117,9 +125,13 @@ export default function TracePage() {
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-1 h-8 bg-gradient-to-b from-orange-400 to-red-400"></div>
-                <h1 className="text-4xl md:text-6xl font-black glitch-text">TRACE</h1>
+                <h1 className="text-4xl md:text-6xl font-black glitch-text">
+                  TRACE
+                </h1>
               </div>
-              <p className="text-white/60 font-mono text-lg ml-4">Journey through time and code</p>
+              <p className="text-white/60 font-mono text-lg ml-4">
+                Journey through time and code
+              </p>
             </div>
 
             {/* Timeline controls */}
@@ -153,7 +165,7 @@ export default function TracePage() {
             {/* Timeline events */}
             <div className="space-y-8">
               {timelineEvents.map((event, index) => {
-                const IconComponent = event.icon
+                const IconComponent = event.icon;
                 return (
                   <div
                     key={event.id}
@@ -169,7 +181,9 @@ export default function TracePage() {
                     {/* Event card */}
                     <Card
                       className={`flex-1 bg-black/50 border transition-all duration-300 ${
-                        hoveredEvent === event.id ? "border-orange-500/50 transform scale-105" : "border-white/10"
+                        hoveredEvent === event.id
+                          ? "border-orange-500/50 transform scale-105"
+                          : "border-white/10"
                       }`}
                     >
                       <CardContent className="p-6">
@@ -177,26 +191,34 @@ export default function TracePage() {
                         <div className="flex items-start justify-between mb-4">
                           <div>
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="font-mono text-sm text-orange-400">{event.year}</span>
+                              <span className="font-mono text-sm text-orange-400">
+                                {event.year}
+                              </span>
                               <span
                                 className={`px-2 py-1 rounded text-xs font-mono ${
                                   event.type === "work"
                                     ? "bg-blue-500/20 text-blue-400"
                                     : event.type === "achievement"
-                                      ? "bg-green-500/20 text-green-400"
-                                      : "bg-purple-500/20 text-purple-400"
+                                    ? "bg-green-500/20 text-green-400"
+                                    : "bg-purple-500/20 text-purple-400"
                                 }`}
                               >
                                 {event.type.toUpperCase()}
                               </span>
                             </div>
-                            <h3 className="text-xl font-bold mb-1">{event.title}</h3>
-                            <p className="text-white/60 font-mono text-sm">{event.company}</p>
+                            <h3 className="text-xl font-bold mb-1">
+                              {event.title}
+                            </h3>
+                            <p className="text-white/60 font-mono text-sm">
+                              {event.company}
+                            </p>
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className="text-white/70 mb-4">{event.description}</p>
+                        <p className="text-white/70 mb-4">
+                          {event.description}
+                        </p>
 
                         {/* Tech stack */}
                         <div className="flex flex-wrap gap-2">
@@ -212,7 +234,7 @@ export default function TracePage() {
                       </CardContent>
                     </Card>
                   </div>
-                )
+                );
               })}
             </div>
           </div>
@@ -293,13 +315,17 @@ export default function TracePage() {
             <Card className="bg-black/50 border border-white/10 text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-green-400 mb-2">15</div>
-                <div className="font-mono text-xs text-white/60">HACKATHONS</div>
+                <div className="font-mono text-xs text-white/60">
+                  HACKATHONS
+                </div>
               </CardContent>
             </Card>
             <Card className="bg-black/50 border border-white/10 text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-purple-400 mb-2">5</div>
-                <div className="font-mono text-xs text-white/60">CONFERENCES</div>
+                <div className="font-mono text-xs text-white/60">
+                  CONFERENCES
+                </div>
               </CardContent>
             </Card>
             <Card className="bg-black/50 border border-white/10 text-center">
@@ -312,5 +338,5 @@ export default function TracePage() {
         </div>
       </main>
     </div>
-  )
+  );
 }

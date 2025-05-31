@@ -1,18 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useTransform,
 } from "framer-motion";
-import { Zap, X } from "lucide-react";
+import { Zap, X, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useGithub from "@/hooks/useGithub";
 import { ProjectCard } from "@/components/loops/ProjectCard";
 import { IProject } from "@/types";
-
 const MAX_PROJECTS = 20;
 
 const languages = ["JavaScript", "TypeScript", "Python", "Solidity", "Rust"];
@@ -256,6 +256,29 @@ export default function LoopsPage() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <Link
+              href="/"
+              className="inline-flex items-center text-white/70 hover:text-green-400 transition-colors font-mono text-sm group"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+              <span className="relative">
+                BACK_TO_ROOT
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-green-400 group-hover:w-full transition-all duration-300"></span>
+              </span>
+            </Link>
+
+            {/* Status indicator */}
+            <div className="flex items-center gap-2 font-mono text-xs">
+              <div className="flex items-center gap-1 text-green-400">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                ACTIVE
+              </div>
+              <span className="text-white/40">|</span>
+              <span className="text-white/60">4 PROJECTS LOADED</span>
+            </div>
+          </div>
+
           <PageTitle />
         </div>
       </motion.header>
