@@ -10,9 +10,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Meriem - Full-Stack Engineer",
+  title: "Meriem - Software Engineer",
   description:
-    "Meriem is a full-stack engineer specializing in frontend and blockchain technology",
+    "Meriem is a software engineer specializing in frontend and blockchain technology",
 };
 
 export default function RootLayout({
