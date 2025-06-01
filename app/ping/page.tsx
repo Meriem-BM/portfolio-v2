@@ -480,7 +480,10 @@ export default function PingPage() {
                   variant="outline"
                   className="border-white/20 hover:border-[#796ab1]/50 justify-start"
                   onClick={() =>
-                    window.open("https://cast.xyz/meriembarhoumi", "_blank")
+                    window.open(
+                      "https://farcaster.xyz/meriembarhoumi.eth",
+                      "_blank"
+                    )
                   }
                 >
                   <Farcaster color="white" />

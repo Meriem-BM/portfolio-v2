@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const ContactButton = () => {
   return (
-    <Link href="/contact" className="group relative font-mono text-sm mx-2">
+    <Link href="/ping" className="group relative font-mono text-sm mx-2">
       {/* Main button container */}
       <div
         className="relative px-4 py-2 bg-black

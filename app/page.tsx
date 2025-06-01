@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Github, Twitter, MessageCircle, Zap } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Geist } from "next/font/google";
 import StatusBar from "@/components/StatusBar";
 import ExploreButton from "@/components/ExploreButton";
 import ContactButton from "@/components/ContactButton";
 import NavBar from "@/components/NavBar";
+import { Farcaster, XIcon } from "@/components/custom-icons";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -100,7 +101,7 @@ export default function HomePage() {
               onClick={() =>
                 window.open("https://github.com/Meriem-BM", "_blank")
               }
-              className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 font-mono"
+              className="border-orange-200/50 text-orange-200 hover:bg-orange-200/10 font-mono"
             >
               <Github className="w-4 h-4 mr-2" />
               github://Meriem-BM
@@ -108,32 +109,38 @@ export default function HomePage() {
             <Button
               variant="outline"
               onClick={() =>
-                window.open("https://farcaster.com/meriembarhoumi", "_blank")
+                window.open(
+                  "https://www.linkedin.com/in/meriem-barhoumi/",
+                  "_blank"
+                )
               }
-              className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 font-mono"
+              className="border-[#0077B5]/50 text-[#0077B5] hover:bg-[#0077B5]/10 font-mono"
             >
-              <MessageCircle className="w-4 h-4 mr-2" />
-              farcaster://meriembarhoumi
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() =>
-                window.open("https://lens.xyz/meriembarhoumi", "_blank")
-              }
-              className="border-pink-500/50 text-pink-400 hover:bg-pink-500/10 font-mono"
-            >
-              <Zap className="w-4 h-4 mr-2" />
-              lens://meriem
+              <Linkedin className="w-4 h-4 mr-2" />
+              linkedin://meriem-barhoumi
             </Button>
             <Button
               variant="outline"
               onClick={() =>
                 window.open("https://x.com/meriembarhoumi", "_blank")
               }
-              className="border-green-500/50 text-green-400 hover:bg-green-500/10 font-mono"
+              className="border-gray-500/50 text-gray-500 hover:bg-gray-500/10 font-mono"
             >
-              <Twitter className="w-4 h-4 mr-2" />
-              twitter://meriembarhoumi
+              <XIcon className="w-4 h-4 mr-2" />
+              x://meriembarhoumi
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() =>
+                window.open(
+                  "https://farcaster.xyz/meriembarhoumi.eth",
+                  "_blank"
+                )
+              }
+              className="border-[#796ab1]/50 text-[#796ab1] hover:bg-[#796ab1]/10 font-mono"
+            >
+              <Farcaster color="#796ab1" />
+              farcaster://meriembarhoumi
             </Button>
           </div>
 
