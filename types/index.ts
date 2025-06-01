@@ -14,3 +14,14 @@ export interface IProject {
   updated_at: string;
   homepage: string;
 }
+
+export interface IBlogPost {
+  id: number;
+  title: string;
+  excerpt: string;
+  date: string;
+  tags: string[];
+  reactions: number;
+  readTime: string;
+  slug: string;
+}
