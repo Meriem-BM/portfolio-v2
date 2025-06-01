@@ -2,83 +2,45 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Award, Users, Code } from "lucide-react";
+import { ArrowLeft, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-const timelineEvents = [
-  {
-    id: 1,
-    year: "2024",
-    title: "Senior Frontend Engineer",
-    company: "Web3 Startup",
-    type: "work",
-    description: "Leading frontend architecture for DeFi protocols",
-    tech: ["React", "Next.js", "viem", "wagmi"],
-    icon: Code,
-  },
-  {
-    id: 2,
-    year: "2024",
-    title: "ETHGlobal Hackathon Winner",
-    company: "ETHGlobal",
-    type: "achievement",
-    description: "Built a cross-chain NFT marketplace in 48 hours",
-    tech: ["Solidity", "Polygon", "IPFS"],
-    icon: Award,
-  },
-  {
-    id: 3,
-    year: "2023",
-    title: "Frontend Developer",
-    company: "Tech Agency",
-    type: "work",
-    description: "Crafted digital experiences for Fortune 500 clients",
-    tech: ["React", "TypeScript", "GSAP"],
-    icon: Code,
-  },
-  {
-    id: 4,
-    year: "2023",
-    title: "DevCon VI Speaker",
-    company: "Ethereum Foundation",
-    type: "community",
-    description: "Presented on 'The Future of Web3 UX'",
-    tech: ["Public Speaking", "Web3", "UX"],
-    icon: Users,
-  },
-  {
-    id: 5,
-    year: "2022",
-    title: "Freelance Developer",
-    company: "Independent",
-    type: "work",
-    description: "Built custom solutions for startups and agencies",
-    tech: ["React", "Node.js", "MongoDB"],
-    icon: Code,
-  },
-];
-
-const communities = [
-  "Developer DAO",
-  "Buildspace",
-  "ETHGlobal",
-  "Farcaster",
-  "Lens Protocol",
-];
+import { motion } from "framer-motion";
+import { timelineEvents, communities } from "@/lib/work/timelineEvents";
+import {
+  containerVariants,
+  itemVariants,
+  timelineVariants,
+  cardVariants,
+  statsVariants,
+} from "@/lib/animationVariats";
 
 export default function TracePage() {
   const [hoveredEvent, setHoveredEvent] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-black text-white relative">
+    <motion.div
+      className="min-h-screen bg-black text-white relative"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
       {/* Background effects */}
-      <div className="fixed inset-0 opacity-20">
+      <motion.div
+        className="fixed inset-0 opacity-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ duration: 1 }}
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-red-900/30 to-purple-900/30"></div>
-      </div>
+      </motion.div>
 
       {/* Grid pattern overlay */}
-      <div className="fixed inset-0 opacity-10 pointer-events-none">
+      <motion.div
+        className="fixed inset-0 opacity-10 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
+      >
         <div
           className="w-full h-full"
           style={{
@@ -89,166 +51,276 @@ export default function TracePage() {
             backgroundSize: "20px 20px",
           }}
         ></div>
-      </div>
+      </motion.div>
 
       {/* Header */}
-      <header className="relative z-10 p-6 border-b border-white/10 backdrop-blur-sm">
+      <motion.header
+        className="relative z-10 p-6 border-b border-white/10 backdrop-blur-sm"
+        variants={itemVariants}
+      >
         <div className="max-w-4xl mx-auto">
           {/* Navigation breadcrumb */}
-          <div className="flex items-center justify-between mb-6">
-            <Link
-              href="/"
-              className="inline-flex items-center text-white/70 hover:text-orange-400 transition-colors font-mono text-sm group"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-              <span className="relative">
-                BACK_TO_ROOT
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-orange-400 group-hover:w-full transition-all duration-300"></span>
-              </span>
-            </Link>
+          <motion.div
+            className="flex items-center justify-between mb-6"
+            variants={itemVariants}
+          >
+            <motion.div whileHover={{ x: -5 }} transition={{ duration: 0.2 }}>
+              <Link
+                href="/"
+                className="inline-flex items-center text-white/70 hover:text-orange-400 transition-colors font-mono text-sm group"
+              >
+                <motion.div
+                  animate={{ x: [-2, 0, -2] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                </motion.div>
+                <span className="relative">
+                  BACK_TO_ROOT
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-orange-400 group-hover:w-full transition-all duration-300"></span>
+                </span>
+              </Link>
+            </motion.div>
 
             {/* Status indicator */}
-            <div className="flex items-center gap-2 font-mono text-xs">
+            <motion.div
+              className="flex items-center gap-2 font-mono text-xs"
+              variants={itemVariants}
+            >
               <div className="flex items-center gap-1 text-green-400">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <motion.div
+                  className="w-2 h-2 bg-green-400 rounded-full"
+                  animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
                 TRACED
               </div>
               <span className="text-white/40">|</span>
               <span className="text-white/60">
                 {timelineEvents.length} MILESTONES
               </span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Page title and description */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <motion.div
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            variants={itemVariants}
+          >
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-1 h-8 bg-gradient-to-b from-orange-400 to-red-400"></div>
-                <h1 className="text-4xl md:text-6xl font-black glitch-text">
+                <motion.div
+                  className="w-1 h-8 bg-gradient-to-b from-orange-400 to-red-400"
+                  initial={{ height: 0 }}
+                  animate={{ height: 32 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                />
+                <motion.h1
+                  className="text-4xl md:text-6xl font-black glitch-text"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                >
                   TRACE
-                </h1>
+                </motion.h1>
               </div>
-              <p className="text-white/60 font-mono text-lg ml-4">
+              <motion.p
+                className="text-white/60 font-mono text-lg ml-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
                 Journey through time and code
-              </p>
+              </motion.p>
             </div>
-
-            {/* Timeline controls */}
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-white/20 text-white/70 hover:border-orange-400 hover:text-orange-400 font-mono"
-              >
-                TIMELINE
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-white/20 text-white/70 hover:border-red-400 hover:text-red-400 font-mono"
-              >
-                RESUME
-              </Button>
-            </div>
-          </div>
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
       <main className="relative z-10 p-6">
         {/* Timeline */}
-        <div className="max-w-4xl mx-auto">
+        <motion.div className="max-w-4xl mx-auto" variants={containerVariants}>
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-orange-500 via-red-500 to-purple-500"></div>
+            <motion.div
+              className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-orange-500 via-red-500 to-purple-500"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "100%", opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+            />
 
             {/* Timeline events */}
-            <div className="space-y-8">
+            <motion.div className="space-y-8" variants={containerVariants}>
               {timelineEvents.map((event, index) => {
                 const IconComponent = event.icon;
                 return (
-                  <div
+                  <motion.div
                     key={event.id}
                     className="relative flex items-start gap-6"
+                    variants={timelineVariants}
+                    custom={index}
                     onMouseEnter={() => setHoveredEvent(event.id)}
                     onMouseLeave={() => setHoveredEvent(null)}
+                    whileHover="hover"
                   >
                     {/* Timeline dot */}
-                    <div className="relative z-10 flex items-center justify-center w-16 h-16 bg-black border-2 border-orange-500 rounded-full">
-                      <IconComponent className="w-6 h-6 text-orange-400" />
-                    </div>
+                    <motion.div
+                      className="relative z-10 flex items-center justify-center w-16 h-16 bg-black border-2 border-orange-500 rounded-full"
+                      whileHover={{
+                        scale: 1.1,
+                        borderColor: "#ff6b35",
+                        boxShadow: "0 0 20px rgba(255, 107, 53, 0.5)",
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.div
+                        animate={{
+                          rotate: hoveredEvent === event.id ? 360 : 0,
+                        }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <IconComponent className="w-6 h-6 text-orange-400" />
+                      </motion.div>
+                    </motion.div>
 
                     {/* Event card */}
-                    <Card
-                      className={`flex-1 bg-black/50 border transition-all duration-300 ${
-                        hoveredEvent === event.id
-                          ? "border-orange-500/50 transform scale-105"
-                          : "border-white/10"
-                      }`}
+                    <motion.div
+                      className="flex-1"
+                      variants={cardVariants}
+                      whileHover="hover"
                     >
-                      <CardContent className="p-6">
-                        {/* Event header */}
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="font-mono text-sm text-orange-400">
-                                {event.year}
-                              </span>
-                              <span
-                                className={`px-2 py-1 rounded text-xs font-mono ${
-                                  event.type === "work"
-                                    ? "bg-blue-500/20 text-blue-400"
-                                    : event.type === "achievement"
-                                    ? "bg-green-500/20 text-green-400"
-                                    : "bg-purple-500/20 text-purple-400"
-                                }`}
+                      <Card
+                        className={`bg-black/50 border transition-all duration-300 ${
+                          hoveredEvent === event.id
+                            ? "border-orange-500/50"
+                            : "border-white/10"
+                        }`}
+                      >
+                        <CardContent className="p-6">
+                          {/* Event header */}
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <motion.div
+                                className="flex items-center gap-2 mb-2"
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.1 + 0.3 }}
                               >
-                                {event.type.toUpperCase()}
-                              </span>
+                                <span className="font-mono text-sm text-orange-400">
+                                  {event.year}
+                                </span>
+                                <motion.span
+                                  className={`px-2 py-1 rounded text-xs font-mono ${
+                                    event.type === "work"
+                                      ? "bg-blue-500/20 text-blue-400"
+                                      : event.type === "achievement"
+                                      ? "bg-green-500/20 text-green-400"
+                                      : "bg-purple-500/20 text-purple-400"
+                                  }`}
+                                  whileHover={{ scale: 1.05 }}
+                                >
+                                  {event.type.toUpperCase()}
+                                </motion.span>
+                              </motion.div>
+                              <motion.h3
+                                className="text-xl font-bold mb-1"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: index * 0.1 + 0.4 }}
+                              >
+                                {event.title}
+                              </motion.h3>
+                              <motion.p
+                                className="text-white/60 font-mono text-sm"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: index * 0.1 + 0.5 }}
+                              >
+                                {event.company}
+                              </motion.p>
                             </div>
-                            <h3 className="text-xl font-bold mb-1">
-                              {event.title}
-                            </h3>
-                            <p className="text-white/60 font-mono text-sm">
-                              {event.company}
-                            </p>
                           </div>
-                        </div>
 
-                        {/* Description */}
-                        <p className="text-white/70 mb-4">
-                          {event.description}
-                        </p>
+                          {/* Description */}
+                          <motion.p
+                            className="text-white/70 mb-4"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.1 + 0.6 }}
+                          >
+                            {event.description}
+                          </motion.p>
 
-                        {/* Tech stack */}
-                        <div className="flex flex-wrap gap-2">
-                          {event.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-white/60"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                          {/* Tech stack */}
+                          <motion.div
+                            className="flex flex-wrap gap-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.1 + 0.7 }}
+                          >
+                            {event.tech.map((tech, techIndex) => (
+                              <motion.span
+                                key={tech}
+                                className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-white/60"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{
+                                  delay: index * 0.1 + 0.8 + techIndex * 0.1,
+                                }}
+                                whileHover={{
+                                  scale: 1.1,
+                                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                                }}
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </motion.div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Communities section */}
-        <div className="max-w-4xl mx-auto mt-16">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-1 h-8 bg-gradient-to-b from-purple-400 to-pink-400"></div>
+        <motion.div
+          className="max-w-4xl mx-auto mt-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          <motion.div
+            className="flex items-center gap-3 mb-8"
+            variants={itemVariants}
+          >
+            <motion.div
+              className="w-1 h-8 bg-gradient-to-b from-purple-400 to-pink-400"
+              initial={{ height: 0 }}
+              animate={{ height: 32 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            />
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="w-6 h-6 text-purple-400" />
+              <motion.div
+                animate={{ rotate: [0, 10, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <Users className="w-6 h-6 text-purple-400" />
+              </motion.div>
               COMMUNITIES
             </h2>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {communities.map((community, index) => (
@@ -288,55 +360,84 @@ export default function TracePage() {
           </div>
 
           {/* Add community CTA */}
-          <div className="mt-8 text-center">
-            <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-dashed border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-center gap-3 text-purple-400 group-hover:text-purple-300 transition-colors">
-                  <Users className="w-5 h-5" />
-                  <span className="font-mono text-sm">JOIN_THE_NETWORK</span>
-                </div>
-                <p className="text-white/60 text-xs mt-2 font-mono">
-                  Always looking for new communities to contribute to
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+          <motion.div
+            className="mt-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.5 }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-dashed border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-center gap-3 text-purple-400 group-hover:text-purple-300 transition-colors">
+                    <Users className="w-5 h-5" />
+                    <span className="font-mono text-sm">JOIN_THE_NETWORK</span>
+                  </div>
+                  <p className="text-white/60 text-xs mt-2 font-mono">
+                    Always looking for new communities to contribute to
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="max-w-4xl mx-auto mt-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <Card className="bg-black/50 border border-white/10 text-center">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">50+</div>
-                <div className="font-mono text-xs text-white/60">PROJECTS</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/50 border border-white/10 text-center">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-400 mb-2">15</div>
-                <div className="font-mono text-xs text-white/60">
-                  HACKATHONS
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/50 border border-white/10 text-center">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-purple-400 mb-2">5</div>
-                <div className="font-mono text-xs text-white/60">
-                  CONFERENCES
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="bg-black/50 border border-white/10 text-center">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-orange-400 mb-2">∞</div>
-                <div className="font-mono text-xs text-white/60">LEARNING</div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+        <motion.div
+          className="max-w-4xl mx-auto mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+        >
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            variants={containerVariants}
+          >
+            {[
+              { value: "20+", label: "PROJECTS", color: "text-cyan-400" },
+              { value: "4", label: "HACKATHONS", color: "text-green-400" },
+              { value: "3", label: "CONFERENCES", color: "text-purple-400" },
+              { value: "∞", label: "LEARNING", color: "text-orange-400" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                variants={statsVariants}
+                whileHover="hover"
+                custom={index}
+              >
+                <Card className="bg-black/50 border border-white/10 text-center">
+                  <CardContent className="p-6">
+                    <motion.div
+                      className={`text-3xl font-bold ${stat.color} mb-2`}
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: 2 + index * 0.1,
+                        type: "spring",
+                        stiffness: 200,
+                      }}
+                    >
+                      {stat.value}
+                    </motion.div>
+                    <motion.div
+                      className="font-mono text-xs text-white/60"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 2.2 + index * 0.1 }}
+                    >
+                      {stat.label}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </main>
-    </div>
+    </motion.div>
   );
 }
