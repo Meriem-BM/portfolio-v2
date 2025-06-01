@@ -25,3 +25,61 @@ export interface IBlogPost {
   readTime: string;
   slug: string;
 }
+
+export interface IDetailBlogPost {
+  id: number;
+  title: string;
+  excerpt?: string;
+  heroGradient?: string;
+  date: string;
+  tags: string[];
+  reactions: number;
+  readTime: string;
+  content: ILogContent[];
+}
+
+interface TimelineContent {
+  type: "timeline";
+  items: ILogItem[];
+}
+
+interface ListContent {
+  type: "list";
+  items: string[];
+}
+
+interface CodeContent {
+  type: "code";
+  content: string;
+  language: string;
+}
+
+interface TextContent {
+  type: "text";
+  content: string;
+}
+
+interface CalloutContent {
+  type: "callout";
+  variant: "info" | "warning" | "danger" | "success";
+  content: string;
+}
+
+interface DefaultContent {
+  type: "hero" | "heading" | "subheading" | "interactive";
+  content: string;
+}
+
+export type ILogContent =
+  | TimelineContent
+  | ListContent
+  | CodeContent
+  | TextContent
+  | CalloutContent
+  | DefaultContent;
+
+export interface ILogItem {
+  time: string;
+  title: string;
+  description: string;
+}
