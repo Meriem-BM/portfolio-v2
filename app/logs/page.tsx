@@ -2,20 +2,19 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { blogPosts, blogTags } from "@/lib/blogs/blogPost";
 import {
   pageVariants,
-  slideInVariants,
-  pulseVariants,
   tagVariants,
   cardVariants,
   staggerContainer,
   floatVariants,
 } from "@/lib/animationVariats";
 import PostCard from "@/components/posts/PostCard";
+import PageHeader from "@/components/PageHeader";
 
 export default function LogsPage() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -85,107 +84,13 @@ export default function LogsPage() {
       </motion.div>
 
       {/* Header */}
-      <motion.header
-        className="relative z-10 p-6 border-b border-white/10 backdrop-blur-sm"
-        variants={slideInVariants}
-      >
-        <div className="max-w-4xl mx-auto">
-          {/* Navigation breadcrumb */}
-          <motion.div
-            className="flex items-center justify-between mb-6"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <Link
-              href="/"
-              className="inline-flex items-center text-white/70 hover:text-green-400 transition-colors font-mono text-sm group"
-            >
-              <motion.div
-                whileHover={{ x: -5 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-              </motion.div>
-              <motion.span className="relative" whileHover={{ scale: 1.05 }}>
-                BACK_TO_ROOT
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-px bg-green-400"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.span>
-            </Link>
-
-            {/* Status indicator */}
-            <motion.div
-              className="flex items-center gap-2 font-mono text-xs"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              <div className="flex items-center gap-1 text-green-400">
-                <motion.div
-                  className="w-2 h-2 bg-green-400 rounded-full"
-                  variants={pulseVariants}
-                  animate="animate"
-                />
-                SYNCED
-              </div>
-              <span className="text-white/40">|</span>
-              <motion.span
-                className="text-white/60"
-                key={filteredPosts.length}
-                initial={{ scale: 1.2, color: "rgb(34, 197, 94)" }}
-                animate={{ scale: 1, color: "rgba(255, 255, 255, 0.6)" }}
-                transition={{ duration: 0.3 }}
-              >
-                {filteredPosts.length} ENTRIES
-              </motion.span>
-            </motion.div>
-          </motion.div>
-
-          {/* Page title and description */}
-          <motion.div
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <motion.div
-                  className="w-1 h-8 bg-gradient-to-b from-green-400 to-blue-400"
-                  initial={{ height: 0 }}
-                  animate={{ height: 32 }}
-                  transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
-                />
-                <motion.h1
-                  className="text-4xl md:text-6xl font-black"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  whileHover={{
-                    textShadow: "0 0 20px rgba(34, 197, 94, 0.5)",
-                    transition: { duration: 0.2 },
-                  }}
-                >
-                  LOGS
-                </motion.h1>
-              </div>
-              <motion.p
-                className="text-white/60 font-mono text-lg ml-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                Field notes from the digital frontier
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-      </motion.header>
+      <PageHeader 
+        title="LOGS"
+        description="Field notes from the digital frontier"
+        statusText="SYNCED"
+        statusInfo={`${filteredPosts.length} ENTRIES`}
+        accentColor="green"
+      />
 
       {/* Tag filters */}
       <motion.div

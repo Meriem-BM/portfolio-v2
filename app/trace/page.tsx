@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowLeft, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { timelineEvents, communities } from "@/lib/work/timelineEvents";
@@ -13,6 +12,7 @@ import {
   cardVariants,
   statsVariants,
 } from "@/lib/animationVariats";
+import PageHeader from "@/components/PageHeader";
 
 export default function TracePage() {
   const [hoveredEvent, setHoveredEvent] = useState<number | null>(null);
@@ -54,92 +54,13 @@ export default function TracePage() {
       </motion.div>
 
       {/* Header */}
-      <motion.header
-        className="relative z-10 p-6 border-b border-white/10 backdrop-blur-sm"
-        variants={itemVariants}
-      >
-        <div className="max-w-4xl mx-auto">
-          {/* Navigation breadcrumb */}
-          <motion.div
-            className="flex items-center justify-between mb-6"
-            variants={itemVariants}
-          >
-            <motion.div whileHover={{ x: -5 }} transition={{ duration: 0.2 }}>
-              <Link
-                href="/"
-                className="inline-flex items-center text-white/70 hover:text-orange-400 transition-colors font-mono text-sm group"
-              >
-                <motion.div
-                  animate={{ x: [-2, 0, -2] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                </motion.div>
-                <span className="relative">
-                  BACK_TO_ROOT
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-orange-400 group-hover:w-full transition-all duration-300"></span>
-                </span>
-              </Link>
-            </motion.div>
-
-            {/* Status indicator */}
-            <motion.div
-              className="flex items-center gap-2 font-mono text-xs"
-              variants={itemVariants}
-            >
-              <div className="flex items-center gap-1 text-green-400">
-                <motion.div
-                  className="w-2 h-2 bg-green-400 rounded-full"
-                  animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                TRACED
-              </div>
-              <span className="text-white/40">|</span>
-              <span className="text-white/60">
-                {timelineEvents.length} MILESTONES
-              </span>
-            </motion.div>
-          </motion.div>
-
-          {/* Page title and description */}
-          <motion.div
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-            variants={itemVariants}
-          >
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <motion.div
-                  className="w-1 h-8 bg-gradient-to-b from-orange-400 to-red-400"
-                  initial={{ height: 0 }}
-                  animate={{ height: 32 }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                />
-                <motion.h1
-                  className="text-4xl md:text-6xl font-black glitch-text"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                >
-                  TRACE
-                </motion.h1>
-              </div>
-              <motion.p
-                className="text-white/60 font-mono text-lg ml-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              >
-                Journey through time and code
-              </motion.p>
-            </div>
-          </motion.div>
-        </div>
-      </motion.header>
+      <PageHeader 
+        title="TRACE"
+        description="Journey through time and code"
+        statusText="TRACED"
+        statusInfo={`${timelineEvents.length} MILESTONES`}
+        accentColor="orange"
+      />
 
       <main className="relative z-10 p-6">
         {/* Timeline */}

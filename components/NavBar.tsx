@@ -23,7 +23,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <nav className="relative z-10 p-6 flex justify-between items-center">
+    <nav className="relative z-10 p-6 flex sm:flex-row flex-col gap-6 sm:gap-0 justify-between items-center">
       <div className="font-mono text-sm text-green-400">
         [{currentTime}] SYSTEM_ACTIVE
       </div>

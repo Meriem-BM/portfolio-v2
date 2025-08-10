@@ -14,7 +14,7 @@ const ExploreButton = () => {
                     hover:before:bg-cyan-500/30 before:transition-colors before:duration-500"
       >
         {/* Content */}
-        <div className="relative flex items-center gap-1.5 text-cyan-500 group-hover:text-cyan-400 transition-colors duration-500">
+        <div className="relative flex items-center justify-center gap-1.5 text-cyan-500 group-hover:text-cyan-400 transition-colors duration-500">
           <span className="tracking-[0.2em] uppercase text-shadow-neon">
             Explore_Work
           </span>
