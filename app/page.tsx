@@ -36,7 +36,7 @@ export default function HomePage() {
     updateCursorSize();
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("resize", updateCursorSize);
-    
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", updateCursorSize);
@@ -121,8 +121,10 @@ export default function HomePage() {
               className="border-orange-200/50 text-orange-200 hover:bg-orange-200/10 font-mono text-xs sm:text-sm"
               size="sm"
             >
-              <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="hidden sm:inline">github://</span>Meriem-BM
+              <Github className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="ml-1 sm:ml-2">
+                <span className="hidden sm:inline">github://</span>Meriem-BM
+              </span>
             </Button>
             <Button
               variant="outline"
@@ -135,8 +137,11 @@ export default function HomePage() {
               className="border-[#0077B5]/50 text-[#0077B5] hover:bg-[#0077B5]/10 font-mono text-xs sm:text-sm"
               size="sm"
             >
-              <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="hidden sm:inline">linkedin://</span>meriem-barhoumi
+              <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="ml-1 sm:ml-2">
+                <span className="hidden sm:inline">linkedin://</span>
+                meriem-barhoumi
+              </span>
             </Button>
             <Button
               variant="outline"
@@ -146,8 +151,10 @@ export default function HomePage() {
               className="border-gray-500/50 text-gray-500 hover:bg-gray-500/10 font-mono text-xs sm:text-sm"
               size="sm"
             >
-              <XIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="hidden sm:inline">x://</span>meriembarhoumi
+              <XIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="ml-1 sm:ml-2">
+                <span className="hidden sm:inline">x://</span>meriembarhoumi
+              </span>
             </Button>
             <Button
               variant="outline"
@@ -161,7 +168,10 @@ export default function HomePage() {
               size="sm"
             >
               <Farcaster color="#796ab1" />
-              <span className="ml-1 sm:ml-2"><span className="hidden sm:inline">farcaster://</span>meriembarhoumi</span>
+              <span className="ml-1 sm:ml-2">
+                <span className="hidden sm:inline">farcaster://</span>
+                meriembarhoumi
+              </span>
             </Button>
           </div>
 
