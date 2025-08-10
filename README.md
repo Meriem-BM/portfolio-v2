@@ -39,4 +39,4 @@ npm run lint     # Run ESLint
 ```
 
 ## Deploy
-Deployed on [Vercel](https://vercel.com) at [yourportfolio.com](https://yourportfolio.com)
+Deployed on [Vercel](https://vercel.com) at [meoumi.dev](https://meoumi.dev)
