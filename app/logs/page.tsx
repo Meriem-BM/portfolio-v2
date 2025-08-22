@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { blogPosts, blogTags } from "@/lib/blogs/blogPost";
+import { getAllBlogPosts, getBlogTags } from "@/lib/blogs/contentManager";
 import {
   pageVariants,
   tagVariants,
@@ -19,6 +19,9 @@ import PageHeader from "@/components/PageHeader";
 export default function LogsPage() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [reactionClicked, setReactionClicked] = useState<string | null>(null);
+
+  const blogPosts = getAllBlogPosts();
+  const blogTags = getBlogTags();
 
   const filteredPosts = selectedTag
     ? blogPosts.filter((post) => post.tags.includes(selectedTag))
