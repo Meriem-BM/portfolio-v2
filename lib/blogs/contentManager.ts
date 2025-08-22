@@ -70,6 +70,12 @@ export class ContentManager {
       .content(content)
       .build();
 
+    // Set the slug after building the post
+    (post as IDetailBlogPost).slug = slug;
+    (post as IDetailBlogPost).summary = metadata.excerpt || "";
+    (post as IDetailBlogPost).updated = metadata.date;
+    (post as IDetailBlogPost).author = { name: "Meriem Barhoumi", url: "https://meoumi.dev/logs" };
+
     this.addPost(slug, post);
     return post;
   }
