@@ -2,14 +2,14 @@ import { ImageResponse } from "next/og";
 import { getBlogPost } from "@/lib/blogs/contentManager";
 import { site } from "@/lib/seo";
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+
 
 export async function GET(
   _req: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const post = getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   const title = post?.title ?? site.name;
 
   return new ImageResponse(
@@ -36,6 +36,6 @@ export async function GET(
         </div>
       </div>
     ),
-    { ...size }
+    { width: 1200, height: 630 }
   );
 }

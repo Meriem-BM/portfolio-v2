@@ -5,8 +5,9 @@ import { site } from "@/lib/seo";
 import ClientPost from "./ClientPost";
 
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-const post = getBlogPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+const { slug } = await params;
+const post = getBlogPost(slug);
 if (!post) return { title: "Log not found" };
 
 
@@ -41,8 +42,9 @@ keywords: post.tags,
 }
 
 
-export default function Page({ params }: { params: { slug: string } }) {
-const post = getBlogPost(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+const { slug } = await params;
+const post = getBlogPost(slug);
 if (!post) return notFound();
-return <ClientPost params={params} initialPost={post} />;
+return <ClientPost params={{ slug }} initialPost={post} />;
 }

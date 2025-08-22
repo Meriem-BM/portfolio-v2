@@ -2,14 +2,7 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    // Turbo is now stable, moved to config.turbopack
   },
   images: {
     formats: ['image/webp', 'image/avif'],

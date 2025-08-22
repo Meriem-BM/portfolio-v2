@@ -5,6 +5,7 @@ import { ILogContent, ILogItem } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Accordion,
@@ -235,11 +236,11 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
         <div className={`${baseClasses} mb-8`}>
           <Card className="bg-black/50 border border-white/10 overflow-hidden">
             <CardContent className="p-0">
-              <img
+              <Image
                 src={item.src}
                 alt={item.alt}
-                width={item.width}
-                height={item.height}
+                width={item.width || 800}
+                height={item.height || 600}
                 className="w-full h-auto"
               />
               {item.caption && (
