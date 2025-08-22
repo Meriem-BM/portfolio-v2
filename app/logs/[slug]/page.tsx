@@ -11,7 +11,7 @@ const post = getBlogPost(slug);
 if (!post) return { title: "Log not found" };
 
 
-const url = `${site.url}/logs/${post.slug}`;
+const url = `${site.url}/logs/${slug}`;
 const description = post.excerpt ?? post.summary ?? site.description;
 
 

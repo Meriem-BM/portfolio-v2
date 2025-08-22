@@ -5,7 +5,16 @@ async function getPostUrls(request: import('@playwright/test').APIRequestContext
   expect(res.status()).toBe(200);
   const xml = await res.text();
   const urls = Array.from(xml.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => (m as RegExpMatchArray)[1]);
-  return urls.filter((u) => /\/logs\//.test(u));
+  // Convert absolute URLs to relative URLs for local testing
+  return urls
+    .filter((u) => /\/logs\//.test(u))
+    .map((u) => {
+      if (u.startsWith('http')) {
+        const url = new URL(u);
+        return url.pathname;
+      }
+      return u;
+    });
 }
 
 const MAX_TESTED = parseInt(process.env.MAX_POSTS || "10", 10);
@@ -34,7 +43,9 @@ test.describe("SEO surface", () => {
 
       // canonical
       const canonical = url.replace(/\/$/, "");
-      expect(html).toContain(`<link rel="canonical" href="${canonical}`);
+      // The canonical URL in HTML is absolute, so we need to check for the full URL
+      const expectedCanonical = canonical.startsWith('http') ? canonical : `https://meoumi.dev${canonical}`;
+      expect(html).toContain(`<link rel="canonical" href="${expectedCanonical}"`);
 
       // meta description ~ 50-200 chars
       expect(html).toMatch(/<meta name="description" content=".{50,200}"/);
@@ -51,7 +62,7 @@ test.describe("SEO surface", () => {
 
       // OG image endpoint
       const slug = url.split("/").filter(Boolean).pop();
-      const og = await request.get(`${base}/og/${slug}`);
+      const og = await request.get(`${base}/api/og/${slug}`);
       expect(og.status(), `${url} OG`).toBe(200);
       expect(og.headers()["content-type"] || "").toContain("image/png");
     }
