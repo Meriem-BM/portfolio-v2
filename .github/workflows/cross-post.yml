@@ -1,0 +1,95 @@
+name: Cross-Post Blog Content
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_slug:
+        description: 'Post slug to cross-post'
+        required: true
+        type: string
+      canonical_url:
+        description: 'Canonical URL of the post'
+        required: true
+        type: string
+      publish_status:
+        description: 'Publish status (draft, unlisted, public)'
+        required: false
+        default: 'draft'
+        type: choice
+        options:
+          - draft
+          - unlisted
+          - public
+      platforms:
+        description: 'Platforms to publish to'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - hashnode
+  push:
+    branches: [main]
+    paths:
+      - 'content/posts/**'
+      - 'scripts/**'
+      - '.github/workflows/cross-post.yml'
+
+jobs:
+  cross-post:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+          
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        
+      - name: Install tsx
+        run: yarn global add tsx
+        
+      - name: Cross-post to Hashnode
+        if: ${{ github.event.inputs.platforms == 'all' || github.event.inputs.platforms == 'hashnode' || github.event.inputs.platforms == '' }}
+        env:
+          HASHNODE_API_TOKEN: ${{ secrets.HASHNODE_API_TOKEN }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+        run: |
+          if [ -n "$HASHNODE_API_TOKEN" ] && [ -n "$HASHNODE_PUBLICATION_ID" ]; then
+            echo "Publishing to Hashnode..."
+            tsx scripts/publish-hashnode.ts "${{ github.event.inputs.post_slug || 'auto' }}" "${{ github.event.inputs.canonical_url || 'https://mac-portfolio.vercel.app' }}"
+          else
+            echo "Skipping Hashnode - missing credentials"
+          fi
+          
+
+          
+      - name: Run unified cross-poster
+        if: ${{ github.event.inputs.platforms == 'all' || github.event.inputs.platforms == '' }}
+        env:
+          HASHNODE_API_TOKEN: ${{ secrets.HASHNODE_API_TOKEN }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+        run: |
+          echo "Running unified cross-poster..."
+          tsx scripts/cross-post.ts \
+            "${{ github.event.inputs.post_slug || 'auto' }}" \
+            "${{ github.event.inputs.canonical_url || 'https://mac-portfolio.vercel.app' }}" \
+            "${{ github.event.inputs.publish_status || 'draft' }}"
+            
+      - name: Create summary
+        if: always()
+        run: |
+          echo "## Cross-Posting Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Post Slug:** ${{ github.event.inputs.post_slug || 'auto' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Canonical URL:** ${{ github.event.inputs.canonical_url || 'https://mac-portfolio.vercel.app' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Publish Status:** ${{ github.event.inputs.publish_status || 'draft' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Platforms:** ${{ github.event.inputs.platforms || 'all' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Check the logs above for detailed results." >> $GITHUB_STEP_SUMMARY
