@@ -38,23 +38,23 @@ on:
 jobs:
   cross-post:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'yarn'
-          
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        
+
       - name: Install tsx
         run: yarn global add tsx
-        
+
       - name: Cross-post to Hashnode
         if: ${{ github.event.inputs.platforms == 'all' || github.event.inputs.platforms == 'hashnode' || github.event.inputs.platforms == '' }}
         env:
@@ -67,9 +67,7 @@ jobs:
           else
             echo "Skipping Hashnode - missing credentials"
           fi
-          
 
-          
       - name: Run unified cross-poster
         if: ${{ github.event.inputs.platforms == 'all' || github.event.inputs.platforms == '' }}
         env:
@@ -81,7 +79,7 @@ jobs:
             "${{ github.event.inputs.post_slug || 'auto' }}" \
             "${{ github.event.inputs.canonical_url || 'https://mac-portfolio.vercel.app' }}" \
             "${{ github.event.inputs.publish_status || 'draft' }}"
-            
+
       - name: Create summary
         if: always()
         run: |

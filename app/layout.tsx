@@ -21,6 +21,29 @@ export const metadata: Metadata = {
   alternates: {
     types: { "application/rss+xml": `${site.url}/rss.xml` },
   },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: site.url,
+    title: site.name,
+    description: site.description,
+    siteName: site.name,
+    images: [
+      {
+        url: `${site.url}/api/og/default`,
+        width: 1200,
+        height: 630,
+        alt: site.name,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: site.name,
+    description: site.description,
+    images: [`${site.url}/api/og/default`],
+    creator: '@meriembarhoumi',
+  },
 };
 
 export default function RootLayout({

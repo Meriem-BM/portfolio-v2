@@ -42,7 +42,7 @@ jobs:
   performance-basic:
     name: 📊 Basic Performance Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -71,7 +71,7 @@ jobs:
   seo-tests:
     name: 🔍 SEO & Accessibility Tests
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -109,7 +109,7 @@ jobs:
   sitemap-validation:
     name: 🗺️ Sitemap & RSS Validation
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -154,7 +154,7 @@ jobs:
     name: 📦 Bundle Analysis
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -189,7 +189,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs: [performance-basic, seo-tests, sitemap-validation]
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -224,7 +224,7 @@ jobs:
   security-scan:
     name: 🔒 Security Scan
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -245,7 +245,7 @@ jobs:
   code-quality:
     name: 🧹 Code Quality
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
@@ -280,7 +280,7 @@ jobs:
     name: 🔗 Cross-Posting Validation
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
+
     steps:
       - name: 🚀 Checkout code
         uses: actions/checkout@v4
