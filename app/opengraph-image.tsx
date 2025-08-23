@@ -15,11 +15,19 @@ export default function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0f0f23",
-          backgroundImage: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          backgroundColor: "#000000",
+          backgroundImage: `
+            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+            radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)
+          `,
+          backgroundSize: "20px 20px, 20px 20px, 100% 100%, 100% 100%, 100% 100%",
           color: "white",
           padding: "40px",
           fontFamily: "system-ui, sans-serif",
+          position: "relative",
         }}
       >
         <div
@@ -29,18 +37,23 @@ export default function Image() {
             textAlign: "center",
             lineHeight: 1.2,
             marginBottom: 30,
-            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            background: "linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #ec4899 100%)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            textShadow: "none",
           }}
         >
-          Meriem Barhoumi
+          Meriem B.
         </div>
         <div
           style={{
             fontSize: 36,
             textAlign: "center",
-            opacity: 0.9,
+            color: "#00d4ff",
             marginBottom: 20,
-            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            fontWeight: "600",
+            textShadow: "0 0 20px rgba(0, 212, 255, 0.5)",
           }}
         >
           Software Engineer
@@ -49,22 +62,24 @@ export default function Image() {
           style={{
             fontSize: 28,
             textAlign: "center",
-            opacity: 0.7,
-            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            color: "#a855f7",
+            fontWeight: "600",
+            textShadow: "0 0 20px rgba(168, 85, 247, 0.5)",
           }}
         >
-          Blockchain SWE
+          Blockchain, Frontend, Full Stack
         </div>
         <div
           style={{
             fontSize: 20,
             textAlign: "center",
-            opacity: 0.6,
+            color: "#ec4899",
             marginTop: 30,
-            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            fontWeight: "500",
+            textShadow: "0 0 15px rgba(236, 72, 153, 0.5)",
           }}
         >
-          Building the future of decentralized applications
+          Building on the blockchain
         </div>
       </div>
     ),
