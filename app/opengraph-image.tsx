@@ -9,26 +9,65 @@ export default function Image() {
     (
       <div
         style={{
-          width: 1200,
-          height: 630,
+          height: "100%",
+          width: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 60,
-          background: "linear-gradient(135deg,#0b0b0b,#111 60%,#0ea5e9)",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#0f0f23",
+          backgroundImage: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
           color: "white",
-          fontFamily: "Inter, system-ui, Segoe UI",
+          padding: "40px",
+          fontFamily: "system-ui, sans-serif",
         }}
       >
-        <div style={{ opacity: 0.8, fontSize: 28 }}>YourSite</div>
-        <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1 }}>
-          Build. Ship. Share.
+        <div
+          style={{
+            fontSize: 72,
+            fontWeight: "bold",
+            textAlign: "center",
+            lineHeight: 1.2,
+            marginBottom: 30,
+            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+          }}
+        >
+          Meriem Barhoumi
         </div>
-        <div style={{ fontSize: 28, opacity: 0.9 }}>
-          Next.js 15 • App Router
+        <div
+          style={{
+            fontSize: 36,
+            textAlign: "center",
+            opacity: 0.9,
+            marginBottom: 20,
+            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+          }}
+        >
+          Software Engineer
+        </div>
+        <div
+          style={{
+            fontSize: 28,
+            textAlign: "center",
+            opacity: 0.7,
+            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+          }}
+        >
+          Blockchain SWE
+        </div>
+        <div
+          style={{
+            fontSize: 20,
+            textAlign: "center",
+            opacity: 0.6,
+            marginTop: 30,
+            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+          }}
+        >
+          Building the future of decentralized applications
         </div>
       </div>
     ),
-    size
+    { width: 1200, height: 630 }
   );
 }
