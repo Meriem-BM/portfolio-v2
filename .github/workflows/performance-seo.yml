@@ -3,15 +3,9 @@ name: 🚀 Performance & SEO Monitoring
 on:
   push:
     branches: [ main, develop ]
-    paths:
-      - 'app/**'
-      - 'components/**'
-      - 'lib/**'
-      - 'styles/**'
-      - 'next.config.ts'
-      - 'tailwind.config.ts'
   pull_request:
     branches: [ main, develop ]
+  deployment:
   workflow_dispatch:
     inputs:
       environment:
@@ -48,7 +42,6 @@ jobs:
   performance-basic:
     name: 📊 Basic Performance Tests
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.run_lighthouse != 'false' }}
     
     steps:
       - name: 🚀 Checkout code
@@ -78,7 +71,6 @@ jobs:
   seo-tests:
     name: 🔍 SEO & Accessibility Tests
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.run_seo_tests != 'false' }}
     
     steps:
       - name: 🚀 Checkout code
@@ -117,7 +109,6 @@ jobs:
   sitemap-validation:
     name: 🗺️ Sitemap & RSS Validation
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.run_sitemap_validation != 'false' }}
     
     steps:
       - name: 🚀 Checkout code
