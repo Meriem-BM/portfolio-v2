@@ -8,27 +8,39 @@ import { addBlogPostFromMarkdown } from "./contentManager";
 // Example 1: Technical Tutorial with Builder API
 export const createTechnicalTutorial = () => {
   const content = createContent()
-    .hero("In this tutorial, we'll build a modern React component library from scratch using TypeScript, Storybook, and automated testing.")
+    .hero(
+      "In this tutorial, we'll build a modern React component library from scratch using TypeScript, Storybook, and automated testing."
+    )
     .heading("Prerequisites")
     .list([
       "Node.js 18+ installed",
       "Basic understanding of React and TypeScript",
-      "Familiarity with npm/yarn package management"
+      "Familiarity with npm/yarn package management",
     ])
     .separator()
     .heading("Project Setup")
-    .text("Let's start by creating our project structure and installing the necessary dependencies.")
-    .code(`
+    .text(
+      "Let's start by creating our project structure and installing the necessary dependencies."
+    )
+    .code(
+      `
 mkdir my-component-library
 cd my-component-library
 npm init -y
 npm install react react-dom typescript
 npm install -D @types/react @types/react-dom
-    `, "bash", { fileName: "setup.sh" })
-    .info("We're using TypeScript for better developer experience and type safety.", "TypeScript Benefits")
+    `,
+      "bash",
+      { fileName: "setup.sh" }
+    )
+    .info(
+      "We're using TypeScript for better developer experience and type safety.",
+      "TypeScript Benefits"
+    )
     .heading("Creating Your First Component")
     .text("We'll start with a simple Button component that demonstrates various patterns.")
-    .code(`
+    .code(
+      `
 import React from 'react';
 import { cva } from 'class-variance-authority';
 
@@ -72,17 +84,22 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
-    `, "typescript", { fileName: "Button.tsx", highlightLines: [4, 5, 6, 25, 26, 27] })
+    `,
+      "typescript",
+      { fileName: "Button.tsx", highlightLines: [4, 5, 6, 25, 26, 27] }
+    )
     .success("This pattern gives us type-safe variants with excellent IntelliSense support!")
     .heading("Testing Strategy")
-    .text("A good testing strategy ensures your components work as expected across different scenarios.")
+    .text(
+      "A good testing strategy ensures your components work as expected across different scenarios."
+    )
     .tabs([
       {
         label: "Unit Tests",
         content: [
           {
             type: "text",
-            content: "Unit tests focus on individual component behavior and props."
+            content: "Unit tests focus on individual component behavior and props.",
           },
           {
             type: "code",
@@ -103,16 +120,16 @@ describe('Button', () => {
   });
 });
             `,
-            fileName: "Button.test.tsx"
-          }
-        ]
+            fileName: "Button.test.tsx",
+          },
+        ],
       },
       {
         label: "Visual Testing",
         content: [
           {
             type: "text",
-            content: "Storybook stories serve as both documentation and visual regression tests."
+            content: "Storybook stories serve as both documentation and visual regression tests.",
           },
           {
             type: "code",
@@ -148,15 +165,15 @@ export const Variants: Story = {
   ),
 };
             `,
-            fileName: "Button.stories.tsx"
-          }
-        ]
-      }
+            fileName: "Button.stories.tsx",
+          },
+        ],
+      },
     ])
     .metrics([
       { label: "Bundle Size", value: "2.3 KB", trend: "down" as const, change: "-15%" },
       { label: "Test Coverage", value: "98%", trend: "up" as const, change: "+12%" },
-      { label: "TypeScript Errors", value: "0", trend: "neutral" as const }
+      { label: "TypeScript Errors", value: "0", trend: "neutral" as const },
     ])
     .separator("gradient")
     .quote(
@@ -172,7 +189,7 @@ export const Variants: Story = {
         content: [
           {
             type: "text",
-            content: "Configure your package.json for optimal distribution."
+            content: "Configure your package.json for optimal distribution.",
           },
           {
             type: "code",
@@ -191,16 +208,16 @@ export const Variants: Story = {
   }
 }
             `,
-            fileName: "package.json"
-          }
-        ]
+            fileName: "package.json",
+          },
+        ],
       },
       {
         title: "Build Process",
         content: [
           {
             type: "text",
-            content: "Use Rollup or similar bundler for optimized builds."
+            content: "Use Rollup or similar bundler for optimized builds.",
           },
           {
             type: "list",
@@ -208,19 +225,21 @@ export const Variants: Story = {
               "ESM and CommonJS outputs",
               "TypeScript declaration files",
               "Tree-shaking support",
-              "CSS extraction"
-            ]
-          }
-        ]
-      }
+              "CSS extraction",
+            ],
+          },
+        ],
+      },
     ])
     .build();
 
   return createBlogPost()
     .id(101)
     .title("Building a React Component Library: The Complete Guide")
-    .excerpt("Learn how to create, test, and publish a professional React component library with TypeScript, Storybook, and modern tooling.")
-    .date(new Date().toISOString().split('T')[0])
+    .excerpt(
+      "Learn how to create, test, and publish a professional React component library with TypeScript, Storybook, and modern tooling."
+    )
+    .date(new Date().toISOString().split("T")[0])
     .tags(["react", "typescript", "components", "tutorial"])
     .heroGradient("from-blue-600 via-purple-600 to-indigo-600")
     .readTime("12 min")
@@ -322,31 +341,49 @@ function ConditionalButton(props: ConditionalButtonProps) {
 > [!WARNING] Remember
 > Advanced patterns should solve real problems, not create complexity for its own sake.`;
 
-  return addBlogPostFromMarkdown("advanced-typescript-patterns", {
-    id: 102,
-    title: "Advanced TypeScript Patterns for React Developers",
-    excerpt: "Explore powerful TypeScript patterns that can improve your React development experience with better type safety and reusability.",
-    date: new Date().toISOString().split('T')[0],
-    tags: ["typescript", "react", "patterns", "advanced"],
-    heroGradient: "from-blue-500 via-cyan-500 to-teal-500",
-  }, markdownContent);
+  return addBlogPostFromMarkdown(
+    "advanced-typescript-patterns",
+    {
+      id: 102,
+      title: "Advanced TypeScript Patterns for React Developers",
+      excerpt:
+        "Explore powerful TypeScript patterns that can improve your React development experience with better type safety and reusability.",
+      date: new Date().toISOString().split("T")[0],
+      tags: ["typescript", "react", "patterns", "advanced"],
+      heroGradient: "from-blue-500 via-cyan-500 to-teal-500",
+    },
+    markdownContent
+  );
 };
 
 // Example 3: Using pre-built templates
 export const createShowcasePost = () => {
-  const content = templates.showcase("My Latest Project", "A comprehensive overview of my recent work building a full-stack application.")
-    .image("/images/project-hero.jpg", "Project screenshot", { caption: "Main dashboard interface" })
+  const content = templates
+    .showcase(
+      "My Latest Project",
+      "A comprehensive overview of my recent work building a full-stack application."
+    )
+    .image("/images/project-hero.jpg", "Project screenshot", {
+      caption: "Main dashboard interface",
+    })
     .heading("Technical Architecture")
     .twoColumn(
       [
         { type: "heading", content: "Frontend" },
         { type: "list", items: ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion"] },
-        { type: "text", content: "The frontend leverages modern React patterns with server-side rendering for optimal performance." }
+        {
+          type: "text",
+          content:
+            "The frontend leverages modern React patterns with server-side rendering for optimal performance.",
+        },
       ],
       [
         { type: "heading", content: "Backend" },
         { type: "list", items: ["Node.js", "PostgreSQL", "Redis", "Docker"] },
-        { type: "text", content: "A robust API built with scalability and maintainability in mind." }
+        {
+          type: "text",
+          content: "A robust API built with scalability and maintainability in mind.",
+        },
       ]
     )
     .video("/videos/demo.mp4", { caption: "Feature demonstration" })
@@ -356,7 +393,7 @@ export const createShowcasePost = () => {
     .id(103)
     .title("Project Showcase: Full-Stack Application")
     .excerpt("Deep dive into the architecture and implementation of my latest full-stack project.")
-    .date(new Date().toISOString().split('T')[0])
+    .date(new Date().toISOString().split("T")[0])
     .tags(["project", "fullstack", "showcase"])
     .content(content)
     .build();
@@ -375,7 +412,7 @@ export const loadExampleContent = () => {
     // Add the markdown example
     addMarkdownExample();
     console.log("✅ Loaded advanced TypeScript patterns post");
-    
+
     // You can add more examples here
     return true;
   } catch (error) {

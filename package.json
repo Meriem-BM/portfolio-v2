@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "cross-post": "tsx scripts/cross-post.ts",
     "publish-hashnode": "tsx scripts/publish-hashnode.ts",
     "test-setup": "tsx scripts/test-setup.ts",
@@ -22,7 +24,17 @@
     "type-check": "tsc --noEmit",
     "security-audit": "yarn audit --audit-level moderate",
     "performance:report": "yarn lighthouse && yarn test:seo",
-    "check:seo": "yarn test:seo && yarn lighthouse"
+    "check:seo": "yarn test:seo && yarn lighthouse",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -89,6 +101,12 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.5",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
     "tailwindcss": "^4",
     "tsx": "^4.7.0",
     "typescript": "^5"

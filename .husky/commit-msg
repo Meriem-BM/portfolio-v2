@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Validate commit message format
+commit_msg=$(cat "$1")
+
+# Check if commit message follows conventional commit format
+if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?(:|!:) .{1,}$" && ! echo "$commit_msg" | grep -qE "^(🎨|♻️|✨|🐛|📝|🚀|⚡|🧪|🔧|👷|🔖|⏪)"; then
+  echo "❌ Invalid commit message format!"
+  echo ""
+  echo "Commit message should follow one of these formats:"
+  echo "  - Conventional: type(scope): description"
+  echo "  - Emoji: 🎨 description"
+  echo ""
+  echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+  echo "Example: feat(auth): add login functionality"
+  echo "Example: 🎨 Update UI components"
+  exit 1
+fi
+

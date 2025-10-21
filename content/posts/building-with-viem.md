@@ -23,16 +23,16 @@ Viem represents a fundamental shift in how we think about Ethereum client librar
 Let's look at a simple example of how viem simplifies common Web3 operations:
 
 ```typescript
-import { createPublicClient, http, getContract } from 'viem'
-import { mainnet } from 'viem/chains'
+import { createPublicClient, http, getContract } from "viem";
+import { mainnet } from "viem/chains";
 
 const client = createPublicClient({
   chain: mainnet,
-  transport: http()
-})
+  transport: http(),
+});
 
 // Reading contract state is now incredibly simple
-const balance = await client.getBalance({ address: '0x...' })
+const balance = await client.getBalance({ address: "0x..." });
 ```
 
 ## Real-World Benefits
@@ -50,4 +50,4 @@ As we move forward, tools like viem are setting the standard for what modern Web
 
 ---
 
-*This post is part of our ongoing series on modern Web3 development practices. Stay tuned for more insights and tutorials!*
+_This post is part of our ongoing series on modern Web3 development practices. Stay tuned for more insights and tutorials!_

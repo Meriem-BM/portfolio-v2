@@ -6,11 +6,11 @@ import { IBlogPost } from "@/types";
 
 export default function PostCard({ post }: { post: IBlogPost }) {
   return (
-    <Card className="bg-black/50 border border-white/10 hover:border-green-500/50 transition-colors duration-300 cursor-pointer group overflow-hidden">
+    <Card className="group cursor-pointer overflow-hidden border border-white/10 bg-black/50 transition-colors duration-300 hover:border-green-500/50">
       <CardContent className="p-6">
         {/* Post meta */}
         <motion.div
-          className="flex items-center gap-4 mb-4 text-xs font-mono text-white/60"
+          className="mb-4 flex items-center gap-4 font-mono text-xs text-white/60"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
@@ -19,7 +19,7 @@ export default function PostCard({ post }: { post: IBlogPost }) {
             className="flex items-center gap-1"
             whileHover={{ scale: 1.1, color: "rgb(34, 197, 94)" }}
           >
-            <Calendar className="w-3 h-3" />
+            <Calendar className="h-3 w-3" />
             {new Date(post.date).toLocaleDateString()}
           </motion.div>
           <motion.div
@@ -29,7 +29,7 @@ export default function PostCard({ post }: { post: IBlogPost }) {
               color: "rgb(59, 130, 246)",
             }}
           >
-            <MessageCircle className="w-3 h-3" />
+            <MessageCircle className="h-3 w-3" />
             {post.readTime}
           </motion.div>
           <motion.div
@@ -42,23 +42,20 @@ export default function PostCard({ post }: { post: IBlogPost }) {
                 transition: { duration: 0.5 },
               }}
             >
-              <Heart className="w-3 h-3" />
+              <Heart className="h-3 w-3" />
             </motion.div>
             {post.reactions}
           </motion.div>
         </motion.div>
 
         {/* Title */}
-        <motion.h2
-          className="text-2xl font-bold mb-3"
-          whileHover={{ color: "rgb(34, 197, 94)" }}
-        >
+        <motion.h2 className="mb-3 text-2xl font-bold" whileHover={{ color: "rgb(34, 197, 94)" }}>
           {post.title}
         </motion.h2>
 
         {/* Excerpt */}
         <motion.p
-          className="text-white/70 mb-4 leading-relaxed"
+          className="mb-4 leading-relaxed text-white/70"
           initial={{ opacity: 0.7 }}
           whileHover={{ opacity: 1 }}
         >
@@ -67,16 +64,16 @@ export default function PostCard({ post }: { post: IBlogPost }) {
 
         {/* Tags */}
         <motion.div
-          className="flex flex-wrap gap-2 mb-4"
+          className="mb-4 flex flex-wrap gap-2"
           variants={staggerContainer}
           animate="animate"
         >
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-white/60 flex items-center gap-1"
+              className="flex items-center gap-1 rounded border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-white/60"
             >
-              <Tag className="w-2 h-2" />
+              <Tag className="h-2 w-2" />
               {tag}
             </span>
           ))}

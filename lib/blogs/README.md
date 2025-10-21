@@ -7,7 +7,7 @@ A comprehensive, type-safe system for creating and managing blog content with su
 ### 1. Create Content with Builder API
 
 ```typescript
-import { createContent, createBlogPost } from '@/lib/blogs/contentBuilder';
+import { createContent, createBlogPost } from "@/lib/blogs/contentBuilder";
 
 // Build content using the fluent API
 const content = createContent()
@@ -32,7 +32,7 @@ const post = createBlogPost()
 ### 2. Create Content from Markdown
 
 ```typescript
-import { addBlogPostFromMarkdown } from '@/lib/blogs/contentManager';
+import { addBlogPostFromMarkdown } from "@/lib/blogs/contentManager";
 
 const markdownContent = `
 # My Blog Post
@@ -58,18 +58,23 @@ function myFunction() {
 - List item 3
 `;
 
-addBlogPostFromMarkdown("my-post", {
-  id: 1,
-  title: "My Blog Post",
-  excerpt: "A short description",
-  date: "2024-01-15",
-  tags: ["tutorial", "typescript"]
-}, markdownContent);
+addBlogPostFromMarkdown(
+  "my-post",
+  {
+    id: 1,
+    title: "My Blog Post",
+    excerpt: "A short description",
+    date: "2024-01-15",
+    tags: ["tutorial", "typescript"],
+  },
+  markdownContent
+);
 ```
 
 ## 📝 Supported Content Types
 
 ### Text Content
+
 - **Hero**: Large intro text with gradient background
 - **Heading**: Main section headings with accent line
 - **Subheading**: Subsection headings
@@ -77,10 +82,12 @@ addBlogPostFromMarkdown("my-post", {
 - **Markdown**: Raw HTML/Markdown content
 
 ### Code & Technical
+
 - **Code**: Syntax-highlighted code blocks with copy button
 - **Interactive**: Hover-effect content blocks
 
 ### Lists & Structure
+
 - **List**: Bulleted or numbered lists
 - **Timeline**: Event timeline with dates
 - **Table**: Data tables with headers
@@ -88,16 +95,19 @@ addBlogPostFromMarkdown("my-post", {
 - **Tabs**: Tabbed content organization
 
 ### Visual Content
+
 - **Image**: Images with captions and sizing
 - **Video**: Video content with posters
 - **Separator**: Visual dividers (line, dots, gradient)
 
 ### Callouts & Highlights
+
 - **Callout**: Info, warning, success, danger callouts
 - **Quote**: Blockquotes with attribution
 - **Metrics**: Key performance indicators with trends
 
 ### Layout Components
+
 - **Two-Column**: Side-by-side content layout
 - **Embed**: External content embeds
 
@@ -113,52 +123,64 @@ const content = createContent()
   .subheading("Subsection heading")
   .text("Paragraph content")
   .markdown("<p>Raw HTML</p>")
-  
+
   // Code blocks
-  .code("const x = 1;", "typescript", { 
-    fileName: "example.ts", 
-    highlightLines: [1, 3] 
+  .code("const x = 1;", "typescript", {
+    fileName: "example.ts",
+    highlightLines: [1, 3],
   })
-  
+
   // Lists
   .list(["Item 1", "Item 2"], false) // ordered: false
-  
+
   // Callouts
   .info("Info message", "Optional Title")
   .warning("Warning message")
   .success("Success message")
   .danger("Danger message")
-  
+
   // Media
-  .image("/path/to/image.jpg", "Alt text", { 
+  .image("/path/to/image.jpg", "Alt text", {
     caption: "Image caption",
     width: 800,
-    height: 600 
+    height: 600,
   })
-  .video("/path/to/video.mp4", { 
+  .video("/path/to/video.mp4", {
     poster: "/poster.jpg",
-    caption: "Video caption" 
+    caption: "Video caption",
   })
-  
+
   // Structure
-  .timeline([
-    { time: "2024-01", title: "Event", description: "Description" }
-  ])
-  .table(["Header 1", "Header 2"], [["Row 1", "Data"], ["Row 2", "Data"]])
-  .metrics([
-    { label: "Users", value: "1,234", change: "+12%", trend: "up" }
-  ])
-  
+  .timeline([{ time: "2024-01", title: "Event", description: "Description" }])
+  .table(
+    ["Header 1", "Header 2"],
+    [
+      ["Row 1", "Data"],
+      ["Row 2", "Data"],
+    ]
+  )
+  .metrics([{ label: "Users", value: "1,234", change: "+12%", trend: "up" }])
+
   // Layout
   .separator("gradient") // "line" | "dots" | "gradient"
   .twoColumn(leftContent, rightContent)
   .tabs([
-    { label: "Tab 1", content: [/* content array */] }
+    {
+      label: "Tab 1",
+      content: [
+        /* content array */
+      ],
+    },
   ])
   .accordion([
-    { title: "Section", content: [/* content array */] }
+    {
+      title: "Section",
+      content: [
+        /* content array */
+      ],
+    },
   ])
-  
+
   .build();
 ```
 
@@ -183,6 +205,7 @@ const post = createBlogPost()
 Our markdown parser supports extended syntax for rich content:
 
 ### Code Blocks with Options
+
 ```
 \`\`\`typescript[file:example.ts,highlight:1,3-5]
 const example = "code";
@@ -193,11 +216,12 @@ function highlighted() {
 ```
 
 ### Callouts
+
 ```
 > [!INFO] Optional Title
 > This creates an info callout
 
-> [!WARNING] 
+> [!WARNING]
 > Warning message
 
 > [!SUCCESS]
@@ -208,6 +232,7 @@ function highlighted() {
 ```
 
 ### Timeline
+
 ```
 > [!TIMELINE]
 > 2024-01-01 | Planning | Initial project planning
@@ -216,6 +241,7 @@ function highlighted() {
 ```
 
 ### Metrics
+
 ```
 > [!METRICS]
 > Users | 1,234 | +12% | up
@@ -226,8 +252,9 @@ function highlighted() {
 ## 🔧 Content Management
 
 ### Adding Posts
+
 ```typescript
-import { ContentManager } from '@/lib/blogs/contentManager';
+import { ContentManager } from "@/lib/blogs/contentManager";
 
 // Add a post directly
 ContentManager.addPost("slug", blogPostObject);
@@ -237,6 +264,7 @@ ContentManager.addPostFromMarkdown("slug", metadata, markdownString);
 ```
 
 ### Retrieving Content
+
 ```typescript
 // Get single post
 const post = getBlogPost("slug");
@@ -252,6 +280,7 @@ const results = ContentManager.searchPosts("typescript");
 ```
 
 ### Validation
+
 ```typescript
 const validation = ContentManager.validatePost(post);
 if (!validation.isValid) {
@@ -262,7 +291,7 @@ if (!validation.isValid) {
 ## 📊 Content Statistics
 
 ```typescript
-import { getContentStats } from '@/lib/blogs/contentBuilder';
+import { getContentStats } from "@/lib/blogs/contentBuilder";
 
 const stats = getContentStats(content);
 // Returns: {
@@ -279,15 +308,12 @@ const stats = getContentStats(content);
 ## 🎯 Pre-built Templates
 
 ```typescript
-import { templates } from '@/lib/blogs/contentBuilder';
+import { templates } from "@/lib/blogs/contentBuilder";
 
 // Technical tutorial template
-const tutorialContent = templates.tutorial(
-  "Tutorial Title",
-  "Tutorial description"
-);
+const tutorialContent = templates.tutorial("Tutorial Title", "Tutorial description");
 
-// Project showcase template  
+// Project showcase template
 const showcaseContent = templates.showcase(
   "Project Name",
   "Project description",
@@ -295,10 +321,7 @@ const showcaseContent = templates.showcase(
 );
 
 // Learning log template
-const learningContent = templates.learningLog(
-  "Learning Title", 
-  "What I learned description"
-);
+const learningContent = templates.learningLog("Learning Title", "What I learned description");
 ```
 
 ## 🚀 Examples
@@ -321,6 +344,7 @@ The entire system is fully typed with TypeScript:
 ## 🎨 Styling
 
 All content is rendered with:
+
 - Dark theme optimized colors
 - Smooth animations and transitions
 - Responsive design

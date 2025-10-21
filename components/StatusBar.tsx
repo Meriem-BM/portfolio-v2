@@ -12,8 +12,8 @@ const StatusBar: React.FC = () => {
   }, []);
 
   return (
-    <div className="text-xs text-gray-500 font-mono mt-16 mb-4 tracking-wider">
-      <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1">
+    <div className="mt-16 mb-4 font-mono text-xs tracking-wider text-gray-500">
+      <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
         <span className="inline-flex items-center">
           STATUS:
           <span className="ml-1 text-green-400">ONLINE</span>

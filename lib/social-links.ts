@@ -39,4 +39,3 @@ export const contactInfo = {
     message: "Available for collaborations, and interesting conversations.",
   },
 } as const;
-

@@ -22,31 +22,25 @@ export const metadata: Metadata = {
     types: { "application/rss+xml": `${site.url}/rss.xml` },
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
+    type: "website",
+    locale: "en_US",
     url: site.url,
     title: site.name,
     description: site.description,
     siteName: site.name,
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: site.name,
     description: site.description,
-    creator: '@meriembarhoumi',
+    creator: "@meriembarhoumi",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-      >
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
         <Vitals />
       </body>

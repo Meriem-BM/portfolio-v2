@@ -11,9 +11,9 @@ export default function BackgroundEffects() {
       </div>
 
       {/* Grid pattern overlay */}
-      <div className="fixed inset-0 opacity-10 pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 opacity-10">
         <div
-          className="w-full h-full"
+          className="h-full w-full"
           style={{
             backgroundImage: `
         linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),

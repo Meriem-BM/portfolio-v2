@@ -5,6 +5,7 @@ A cutting-edge portfolio built with Next.js 15, TypeScript, and modern web techn
 ## ✨ Features
 
 ### 🎨 **Modern UI/UX**
+
 - **Next.js 15** with App Router and Turbopack
 - **TypeScript** for type safety and developer experience
 - **Tailwind CSS** for utility-first styling
@@ -12,12 +13,14 @@ A cutting-edge portfolio built with Next.js 15, TypeScript, and modern web techn
 - **Responsive Design** optimized for all devices
 
 ### 📝 **Content Management**
+
 - **Markdown-based** blog system
 - **Structured content** with flexible components
 - **Content validation** and error handling
 - **Dynamic routing** for blog posts
 
 ### 🔗 **Cross-Posting System**
+
 - **Multi-platform publishing** (Hashnode)
 - **Canonical URL support** for SEO optimization
 - **Content transformation** for platform-specific formats
@@ -25,6 +28,7 @@ A cutting-edge portfolio built with Next.js 15, TypeScript, and modern web techn
 - **Comprehensive error handling** and validation
 
 ### 🔍 **SEO & Performance**
+
 - **Structured data** (Schema.org) markup
 - **Core Web Vitals** monitoring
 - **RSS feeds** and sitemaps
@@ -32,6 +36,7 @@ A cutting-edge portfolio built with Next.js 15, TypeScript, and modern web techn
 - **Performance optimization** and lazy loading
 
 ### 🛠️ **Developer Experience**
+
 - **ESLint** configuration for code quality
 - **TypeScript** strict mode enabled
 - **Comprehensive testing** with Playwright
@@ -41,10 +46,12 @@ A cutting-edge portfolio built with Next.js 15, TypeScript, and modern web techn
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - Yarn package manager
 
 ### Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/portfolio-v2.git
@@ -58,7 +65,9 @@ yarn dev
 ```
 
 ### Environment Setup
+
 Create a `.env.local` file:
+
 ```bash
 # Cross-posting configuration
 HASHNODE_API_TOKEN=your_hashnode_token
@@ -73,23 +82,28 @@ NEXT_PUBLIC_SITE_DESCRIPTION=Your site description
 ## 📚 Documentation
 
 ### 📖 **Setup Guides**
+
 - [Cross-Posting Setup](SETUP.md) - Complete setup guide
 - [Implementation Details](docs/IMPLEMENTATION.md) - Technical implementation
 - [SEO & Vitals Guide](docs/SEO_AND_VITALS.md) - SEO optimization
 
 ### 🔧 **Scripts & Tools**
+
 - [Cross-Posting Scripts](scripts/README.md) - Script documentation
 - [Content Management](lib/blogs/README.md) - Blog system guide
 
 ## 🎯 Cross-Posting System
 
 ### Overview
+
 The cross-posting system automatically publishes your blog content to multiple platforms while maintaining proper SEO with canonical URLs.
 
 ### Supported Platforms
+
 - ✅ **Hashnode** - GraphQL API with Markdown support
 
 ### Usage
+
 ```bash
 # Publish to all platforms
 yarn cross-post my-post https://yoursite.com/posts/my-post draft
@@ -102,7 +116,9 @@ yarn test-setup
 ```
 
 ### GitHub Actions
+
 Automated cross-posting workflows:
+
 - Manual trigger with customizable options
 - Automatic triggering on content changes
 - Multi-platform publishing support
@@ -111,6 +127,7 @@ Automated cross-posting workflows:
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 # SEO and performance tests
 yarn test:seo
@@ -123,6 +140,7 @@ npx tsc --noEmit
 ```
 
 ### Test Coverage
+
 - **SEO endpoints** (RSS, sitemap, robots.txt)
 - **Cross-posting functionality**
 - **Content validation**
@@ -147,18 +165,21 @@ portfolio-v2/
 ## 🔧 Configuration
 
 ### Cross-Posting
+
 - Platform-specific API credentials
 - Content transformation rules
 - Publishing preferences
 - Error handling strategies
 
 ### SEO & Performance
+
 - Structured data markup
 - Core Web Vitals thresholds
 - Performance monitoring
 - Search engine optimization
 
 ### Content Management
+
 - Markdown parsing rules
 - Content validation
 - Component mapping
@@ -167,18 +188,21 @@ portfolio-v2/
 ## 🚨 Troubleshooting
 
 ### Common Issues
+
 1. **API Credentials** - Verify environment variables
 2. **Content Format** - Check markdown syntax
 3. **Network Issues** - Verify API endpoints
 4. **Type Errors** - Run TypeScript compiler
 
 ### Debug Mode
+
 ```bash
 DEBUG=true yarn dev
 DEBUG=true yarn cross-post my-post https://yoursite.com/posts/my-post
 ```
 
 ### Getting Help
+
 - Check the [troubleshooting guides](docs/IMPLEMENTATION.md#troubleshooting)
 - Review error logs and stack traces
 - Validate configuration with `yarn test-setup`
@@ -194,6 +218,7 @@ DEBUG=true yarn cross-post my-post https://yoursite.com/posts/my-post
 - **Webhook Support** - Real-time notifications
 
 ### Performance Goals
+
 - **Core Web Vitals** - All metrics in "Good" range
 - **Lighthouse Score** - 90+ across all categories
 - **SEO Score** - 100% optimization
@@ -208,6 +233,7 @@ DEBUG=true yarn cross-post my-post https://yoursite.com/posts/my-post
 5. Submit a pull request
 
 ### Development Guidelines
+
 - Follow TypeScript strict mode
 - Maintain ESLint compliance
 - Add comprehensive error handling

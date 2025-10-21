@@ -52,8 +52,7 @@ export const validateField = (name: keyof FormData, value: string): string => {
     case "name":
       if (!value.trim()) return "Name is required";
       if (value.trim().length < 2) return "Name must be at least 2 characters";
-      if (value.trim().length > 50)
-        return "Name must be less than 50 characters";
+      if (value.trim().length > 50) return "Name must be less than 50 characters";
       return "";
 
     case "email":
@@ -65,10 +64,8 @@ export const validateField = (name: keyof FormData, value: string): string => {
 
     case "content":
       if (!value.trim()) return "Message is required";
-      if (value.trim().length < 10)
-        return "Message must be at least 10 characters";
-      if (value.trim().length > 1000)
-        return "Message must be less than 1000 characters";
+      if (value.trim().length < 10) return "Message must be at least 10 characters";
+      if (value.trim().length > 1000) return "Message must be less than 1000 characters";
       return "";
 
     default:

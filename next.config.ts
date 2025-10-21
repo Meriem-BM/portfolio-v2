@@ -1,16 +1,16 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
     // Turbo is now stable, moved to config.turbopack
   },
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // Bundle analysis configuration
-  ...(process.env.ANALYZE === 'true' && {
+  ...(process.env.ANALYZE === "true" && {
     webpack: (config, { isServer }) => {
       if (!isServer) {
         config.resolve.fallback = {
@@ -29,49 +29,49 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
           },
         ],
       },
       {
-        source: '/sitemap.xml',
+        source: "/sitemap.xml",
         headers: [
           {
-            key: 'Content-Type',
-            value: 'application/xml',
+            key: "Content-Type",
+            value: "application/xml",
           },
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=86400',
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=86400",
           },
         ],
       },
       {
-        source: '/rss.xml',
+        source: "/rss.xml",
         headers: [
           {
-            key: 'Content-Type',
-            value: 'application/rss+xml',
+            key: "Content-Type",
+            value: "application/rss+xml",
           },
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=86400',
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=86400",
           },
         ],
       },
@@ -81,8 +81,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/blog/:slug*',
-        destination: '/logs/:slug*',
+        source: "/blog/:slug*",
+        destination: "/logs/:slug*",
         permanent: true,
       },
     ];

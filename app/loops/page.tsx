@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Zap, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import useGithub from "@/hooks/useGithub";
@@ -41,8 +36,6 @@ const itemVariants = {
     },
   },
 };
-
-
 
 const filterButtonVariants = {
   initial: { scale: 1, opacity: 0.7 },
@@ -91,12 +84,9 @@ const BackgroundEffects = () => {
       </motion.div>
 
       {/* Animated grid pattern overlay */}
-      <motion.div
-        className="fixed inset-0 opacity-10 pointer-events-none"
-        style={{ y: y2 }}
-      >
+      <motion.div className="pointer-events-none fixed inset-0 opacity-10" style={{ y: y2 }}>
         <motion.div
-          className="w-full h-full"
+          className="h-full w-full"
           style={{
             backgroundImage: `
               linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
@@ -118,16 +108,14 @@ const BackgroundEffects = () => {
   );
 };
 
-
-
 const LoadingView = () => (
   <motion.div
-    className="col-span-full flex justify-center mt-32"
+    className="col-span-full mt-32 flex justify-center"
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
   >
-    <div className="inline-block p-6 border border-dashed border-white/20 rounded-lg">
+    <div className="inline-block rounded-lg border border-dashed border-white/20 p-6">
       <motion.div
         animate={{
           rotate: 360,
@@ -138,10 +126,10 @@ const LoadingView = () => (
           scale: { duration: 1, repeat: Infinity, ease: "easeInOut" },
         }}
       >
-        <Zap className="w-8 h-8 mx-auto mb-4 text-white/40" />
+        <Zap className="mx-auto mb-4 h-8 w-8 text-white/40" />
       </motion.div>
       <motion.p
-        className="font-mono text-white/60 text-sm"
+        className="font-mono text-sm text-white/60"
         animate={{ opacity: [0.4, 1, 0.4] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -153,12 +141,12 @@ const LoadingView = () => (
 
 const ErrorView = () => (
   <motion.div
-    className="col-span-full text-center mt-12"
+    className="col-span-full mt-12 text-center"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
   >
-    <p className="font-mono text-white/60 text-sm">Error loading projects</p>
+    <p className="font-mono text-sm text-white/60">Error loading projects</p>
   </motion.div>
 );
 
@@ -187,18 +175,16 @@ export default function LoopsPage() {
       return;
     }
 
-    const filteredProjects = projects?.filter(
-      (project) => project.language === language
-    );
+    const filteredProjects = projects?.filter((project) => project.language === language);
     setProjectList(filteredProjects || []);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-black text-white">
       <BackgroundEffects />
 
       {/* Header */}
-      <PageHeader 
+      <PageHeader
         title="LOOPS"
         description="Projects, experiments, and digital artifacts"
         statusText="ACTIVE"
@@ -216,9 +202,9 @@ export default function LoopsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.5 }}
           >
-            <div className="max-w-7xl mx-auto">
+            <div className="mx-auto max-w-7xl">
               <motion.div
-                className="flex gap-2 flex-wrap"
+                className="flex flex-wrap gap-2"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -226,14 +212,12 @@ export default function LoopsPage() {
                 {languages.map((language, index) => (
                   <motion.button
                     key={language}
-                    className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-white/60 transition-colors cursor-pointer"
+                    className="cursor-pointer rounded border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-white/60 transition-colors"
                     variants={filterButtonVariants}
                     initial="initial"
                     whileHover="hover"
                     whileTap="tap"
-                    animate={
-                      selectedLanguage === language ? "selected" : "initial"
-                    }
+                    animate={selectedLanguage === language ? "selected" : "initial"}
                     transition={{ delay: index * 0.05 }}
                     onClick={() => {
                       setSelectedLanguage(language);
@@ -245,7 +229,7 @@ export default function LoopsPage() {
                 ))}
                 {selectedLanguage && (
                   <motion.button
-                    className="px-2 py-1 text-xs font-mono transition-colors cursor-pointer text-red-500"
+                    className="cursor-pointer px-2 py-1 font-mono text-xs text-red-500 transition-colors"
                     variants={filterButtonVariants}
                     initial="initial"
                     whileHover="hover"
@@ -255,7 +239,7 @@ export default function LoopsPage() {
                       filterProjectsByLanguage("");
                     }}
                   >
-                    <X className="w-4 h-4" />
+                    <X className="h-4 w-4" />
                   </motion.button>
                 )}
               </motion.div>
@@ -271,7 +255,7 @@ export default function LoopsPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="mx-auto max-w-7xl">
           <motion.div
             className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
             variants={containerVariants}
@@ -279,9 +263,7 @@ export default function LoopsPage() {
             animate="visible"
           >
             <AnimatePresence mode="wait">
-              {loading && projects && projects.length === 0 && (
-                <LoadingView key="loading" />
-              )}
+              {loading && projects && projects.length === 0 && <LoadingView key="loading" />}
 
               {error && <ErrorView key="error" />}
 
@@ -319,31 +301,24 @@ export default function LoopsPage() {
                 ))}
 
               {projectList && projectList.length === 0 && (
-                <motion.div className="col-span-full flex justify-center mt-12">
-                  <p className="font-mono text-white/60 text-sm">
-                    No projects found
-                  </p>
+                <motion.div className="col-span-full mt-12 flex justify-center">
+                  <p className="font-mono text-sm text-white/60">No projects found</p>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {projectList &&
-              projectList.length % MAX_PROJECTS === 0 &&
-              projectList.length > 0 && (
-                <motion.div
-                  className="col-span-full flex justify-center mt-12"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button onClick={loadMore}>Load More</Button>
-                  </motion.div>
+            {projectList && projectList.length % MAX_PROJECTS === 0 && projectList.length > 0 && (
+              <motion.div
+                className="col-span-full mt-12 flex justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button onClick={loadMore}>Load More</Button>
                 </motion.div>
-              )}
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </motion.main>
