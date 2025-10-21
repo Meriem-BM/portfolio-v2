@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Solana, Ethereum, XIcon } from "@/components/custom-icons";
 import Farcaster from "@/components/custom-icons/Farcaster";
+import { socialLinks, web3Identities, contactInfo } from "@/lib/social-links";
 
 export default function ContactInfo() {
   return (
@@ -16,15 +17,15 @@ export default function ContactInfo() {
         <div className="space-y-3 sm:space-y-4">
           <Card className="bg-black/50 border border-white/10 transition-colors">
             <CardContent className="px-3 sm:px-4 py-3 flex items-center gap-4">
-              <div className="text-white text-sm sm:text-base break-all">barhoumi.meriem1@gmail.com</div>
+              <div className="text-white text-sm sm:text-base break-all">{contactInfo.email}</div>
             </CardContent>
           </Card>
 
           <Card className="bg-black/50 border border-white/10 hover:border-blue-500/50 transition-colors">
             <CardContent className="p-3 sm:p-4 flex items-center justify-between gap-4">
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-xs sm:text-sm text-white/70">ENS</div>
-                <div className="text-white text-sm sm:text-base break-all">meriembarhoumi.eth</div>
+                <div className="font-mono text-xs sm:text-sm text-white/70">{web3Identities.ens.label}</div>
+                <div className="text-white text-sm sm:text-base break-all">{web3Identities.ens.address}</div>
               </div>
               <div className="flex-shrink-0">
                 <Ethereum color="gray" />
@@ -35,8 +36,8 @@ export default function ContactInfo() {
           <Card className="bg-black/50 border border-white/10 hover:border-purple-500/50 transition-colors">
             <CardContent className="p-3 sm:p-4 flex items-center justify-between gap-4">
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-xs sm:text-sm text-white/70">SNS</div>
-                <div className="text-white text-sm sm:text-base break-all">meriem.sol</div>
+                <div className="font-mono text-xs sm:text-sm text-white/70">{web3Identities.sns.label}</div>
+                <div className="text-white text-sm sm:text-base break-all">{web3Identities.sns.address}</div>
               </div>
               <div className="flex-shrink-0">
                 <Solana color="gray" />
@@ -54,50 +55,44 @@ export default function ContactInfo() {
             variant="outline"
             className="border-white/20 hover:border-white/50 justify-start text-xs sm:text-sm"
             onClick={() =>
-              window.open("https://github.com/Meriem-BM", "_blank")
+              window.open(socialLinks.github.url, "_blank")
             }
           >
             <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            <span className="truncate">Meriem-BM</span>
+            <span className="truncate">{socialLinks.github.username}</span>
           </Button>
           
           <Button
             variant="outline"
             className="border-white/20 hover:border-white/50 justify-start text-xs sm:text-sm"
             onClick={() =>
-              window.open("https://x.com/meriembarhoumi", "_blank")
+              window.open(socialLinks.twitter.url, "_blank")
             }
           >
             <XIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            <span className="truncate">meriembarhoumi</span>
+            <span className="truncate">{socialLinks.twitter.username}</span>
           </Button>
           
           <Button
             variant="outline"
             className="border-white/20 hover:border-[#0077B5]/50 justify-start text-xs sm:text-sm"
             onClick={() =>
-              window.open(
-                "https://www.linkedin.com/in/meriem-barhoumi/",
-                "_blank"
-              )
+              window.open(socialLinks.linkedin.url, "_blank")
             }
           >
             <Linkedin className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-            <span className="truncate">meriem-barhoumi</span>
+            <span className="truncate">{socialLinks.linkedin.username}</span>
           </Button>
           
           <Button
             variant="outline"
             className="border-white/20 hover:border-[#796ab1]/50 justify-start text-xs sm:text-sm"
             onClick={() =>
-              window.open(
-                "https://farcaster.xyz/meriembarhoumi.eth",
-                "_blank"
-              )
+              window.open(socialLinks.farcaster.url, "_blank")
             }
           >
             <Farcaster color="white" />
-            <span className="truncate ml-2">meriembarhoumi</span>
+            <span className="truncate ml-2">{socialLinks.farcaster.username}</span>
           </Button>
         </div>
       </div>
@@ -110,11 +105,11 @@ export default function ContactInfo() {
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="font-mono text-xs sm:text-sm text-green-400">
-                ONLINE
+                {contactInfo.availability.status.toUpperCase()}
               </span>
             </div>
             <p className="text-white/70 text-xs sm:text-sm">
-              Available for collaborations, and interesting conversations.
+              {contactInfo.availability.message}
             </p>
           </CardContent>
         </Card>

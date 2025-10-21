@@ -9,6 +9,7 @@ import ExploreButton from "@/components/ExploreButton";
 import ContactButton from "@/components/ContactButton";
 import NavBar from "@/components/NavBar";
 import { Farcaster, XIcon } from "@/components/custom-icons";
+import { socialLinks } from "@/lib/social-links";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -116,23 +117,20 @@ export default function HomePage() {
             <Button
               variant="outline"
               onClick={() =>
-                window.open("https://github.com/Meriem-BM", "_blank")
+                window.open(socialLinks.github.url, "_blank")
               }
               className="border-orange-200/50 text-orange-200 hover:bg-orange-200/10 font-mono text-xs sm:text-sm"
               size="sm"
             >
               <Github className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="ml-1 sm:ml-2">
-                <span className="hidden sm:inline">github://</span>Meriem-BM
+                <span className="hidden sm:inline">github://</span>{socialLinks.github.username}
               </span>
             </Button>
             <Button
               variant="outline"
               onClick={() =>
-                window.open(
-                  "https://www.linkedin.com/in/meriem-barhoumi/",
-                  "_blank"
-                )
+                window.open(socialLinks.linkedin.url, "_blank")
               }
               className="border-[#0077B5]/50 text-[#0077B5] hover:bg-[#0077B5]/10 font-mono text-xs sm:text-sm"
               size="sm"
@@ -140,29 +138,26 @@ export default function HomePage() {
               <Linkedin className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="ml-1 sm:ml-2">
                 <span className="hidden sm:inline">linkedin://</span>
-                meriem-barhoumi
+                {socialLinks.linkedin.username}
               </span>
             </Button>
             <Button
               variant="outline"
               onClick={() =>
-                window.open("https://x.com/meriembarhoumi", "_blank")
+                window.open(socialLinks.twitter.url, "_blank")
               }
               className="border-gray-500/50 text-gray-500 hover:bg-gray-500/10 font-mono text-xs sm:text-sm"
               size="sm"
             >
               <XIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               <span className="ml-1 sm:ml-2">
-                <span className="hidden sm:inline">x://</span>meriembarhoumi
+                <span className="hidden sm:inline">x://</span>{socialLinks.twitter.username}
               </span>
             </Button>
             <Button
               variant="outline"
               onClick={() =>
-                window.open(
-                  "https://farcaster.xyz/meriembarhoumi.eth",
-                  "_blank"
-                )
+                window.open(socialLinks.farcaster.url, "_blank")
               }
               className="border-[#796ab1]/50 text-[#796ab1] hover:bg-[#796ab1]/10 font-mono text-xs sm:text-sm"
               size="sm"
@@ -170,7 +165,7 @@ export default function HomePage() {
               <Farcaster color="#796ab1" />
               <span className="ml-1 sm:ml-2">
                 <span className="hidden sm:inline">farcaster://</span>
-                meriembarhoumi
+                {socialLinks.farcaster.username}
               </span>
             </Button>
           </div>

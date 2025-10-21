@@ -38,8 +38,8 @@ const StatusBar: React.FC = () => {
           <span className="mx-1">+</span>
           <span className="text-green-400">SOLIDITY</span>
           <span className="mx-1">+</span>
-          <span className="text-orange-400">RUST</span>
-          <span className="mx-1">+</span>
+          {/* <span className="text-orange-400">RUST</span>
+          <span className="mx-1">+</span> */}
           <span className="text-blue-300">TYPESCRIPT</span>
         </span>
       </div>
