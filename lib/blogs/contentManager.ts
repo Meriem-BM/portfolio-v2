@@ -57,7 +57,7 @@ export class ContentManager {
   ): IDetailBlogPost {
     const content = parseMarkdown(markdownContent);
     const stats = getContentStats(content);
-    
+
     const post = createBlogPost()
       .id(metadata.id)
       .title(metadata.title)
@@ -108,7 +108,7 @@ export class ContentManager {
    * Get posts by tag
    */
   static getPostsByTag(tag: string): IBlogPost[] {
-    return this.summaryPosts.filter(post => post.tags.includes(tag));
+    return this.summaryPosts.filter((post) => post.tags.includes(tag));
   }
 
   /**
@@ -116,10 +116,11 @@ export class ContentManager {
    */
   static searchPosts(query: string): IBlogPost[] {
     const lowercaseQuery = query.toLowerCase();
-    return this.summaryPosts.filter(post => 
-      post.title.toLowerCase().includes(lowercaseQuery) ||
-      post.excerpt.toLowerCase().includes(lowercaseQuery) ||
-      post.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+    return this.summaryPosts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(lowercaseQuery) ||
+        post.excerpt.toLowerCase().includes(lowercaseQuery) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(lowercaseQuery))
     );
   }
 
@@ -128,8 +129,8 @@ export class ContentManager {
    */
   static getAllTags(): string[] {
     const tagSet = new Set<string>();
-    this.summaryPosts.forEach(post => {
-      post.tags.forEach(tag => tagSet.add(tag));
+    this.summaryPosts.forEach((post) => {
+      post.tags.forEach((tag) => tagSet.add(tag));
     });
     return Array.from(tagSet).sort();
   }
@@ -149,7 +150,7 @@ export class ContentManager {
     try {
       const post = JSON.parse(jsonData) as IDetailBlogPost;
       const validation = this.validatePost(post);
-      
+
       if (validation.isValid) {
         this.addPost(slug, post);
         return true;
@@ -167,20 +168,22 @@ export class ContentManager {
    * Update summary posts from full posts
    */
   private static updateSummaryPosts(): void {
-    this.summaryPosts = Array.from(this.posts.entries()).map(([slug, post]) => ({
-      id: post.id,
-      title: post.title,
-      excerpt: post.excerpt || "",
-      date: post.date,
-      tags: post.tags,
-      reactions: post.reactions,
-      readTime: post.readTime,
-      slug,
-      summary: post.summary || "",
-      author: post.author || { name: "", url: "" },
-      cover: post.cover || "",
-      updated: post.updated || "",
-    })).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    this.summaryPosts = Array.from(this.posts.entries())
+      .map(([slug, post]) => ({
+        id: post.id,
+        title: post.title,
+        excerpt: post.excerpt || "",
+        date: post.date,
+        tags: post.tags,
+        reactions: post.reactions,
+        readTime: post.readTime,
+        slug,
+        summary: post.summary || "",
+        author: post.author || { name: "", url: "" },
+        cover: post.cover || "",
+        updated: post.updated || "",
+      }))
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
   /**
@@ -233,15 +236,20 @@ async function getTokenBalance(address: string, tokenAddress: string) {
 > [!SUCCESS] Migration Complete
 > The migration wasn't without challenges, but the improved developer experience made it worthwhile.`;
 
-    this.addPostFromMarkdown("building-with-viem", {
-      id: 1,
-      title: "Building with Viem: A Web3 Developer's Journey",
-      excerpt: "Exploring the new paradigms in Web3 development and why viem is changing the game...",
-      date: "2024-01-15",
-      tags: ["frontend", "blockchain", "learning"],
-      reactions: 24,
-      heroGradient: "from-blue-500 via-purple-500 to-cyan-500",
-    }, viemMarkdown);
+    this.addPostFromMarkdown(
+      "building-with-viem",
+      {
+        id: 1,
+        title: "Building with Viem: A Web3 Developer's Journey",
+        excerpt:
+          "Exploring the new paradigms in Web3 development and why viem is changing the game...",
+        date: "2024-01-15",
+        tags: ["frontend", "blockchain", "learning"],
+        reactions: 24,
+        heroGradient: "from-blue-500 via-purple-500 to-cyan-500",
+      },
+      viemMarkdown
+    );
 
     // Example: Experimental UI
     const uiMarkdown = `# The Art of Experimental UI
@@ -267,15 +275,19 @@ Traditional UI patterns exist for good reasons, but they can also limit our crea
 > Task Completion | 94% | +12% | up  
 > Time on Page | 3:24 | +45s | up`;
 
-    this.addPostFromMarkdown("experimental-ui-art", {
-      id: 2,
-      title: "The Art of Experimental UI",
-      excerpt: "How to push boundaries in interface design while maintaining usability...",
-      date: "2024-01-08",
-      tags: ["design", "frontend", "ideas"],
-      reactions: 18,
-      heroGradient: "from-pink-500 via-purple-500 to-indigo-500",
-    }, uiMarkdown);
+    this.addPostFromMarkdown(
+      "experimental-ui-art",
+      {
+        id: 2,
+        title: "The Art of Experimental UI",
+        excerpt: "How to push boundaries in interface design while maintaining usability...",
+        date: "2024-01-08",
+        tags: ["design", "frontend", "ideas"],
+        reactions: 18,
+        heroGradient: "from-pink-500 via-purple-500 to-indigo-500",
+      },
+      uiMarkdown
+    );
 
     // Example: Hackathon Chronicles
     const hackathonMarkdown = `# Hackathon Chronicles: 48 Hours of Chaos
@@ -301,15 +313,19 @@ Build a DeFi protocol that solves real problems in the space. Our team decided t
 > [!SUCCESS] Mission Accomplished
 > We didn't win, but we built something amazing and learned a ton. Sometimes that's more valuable than any prize.`;
 
-    this.addPostFromMarkdown("hackathon-chronicles", {
-      id: 3,
-      title: "Hackathon Chronicles: 48 Hours of Chaos", 
-      excerpt: "Lessons learned from building a DeFi protocol in a weekend...",
-      date: "2024-01-01",
-      tags: ["hackathon", "blockchain", "learning"],
-      reactions: 31,
-      heroGradient: "from-green-500 via-teal-500 to-blue-500",
-    }, hackathonMarkdown);
+    this.addPostFromMarkdown(
+      "hackathon-chronicles",
+      {
+        id: 3,
+        title: "Hackathon Chronicles: 48 Hours of Chaos",
+        excerpt: "Lessons learned from building a DeFi protocol in a weekend...",
+        date: "2024-01-01",
+        tags: ["hackathon", "blockchain", "learning"],
+        reactions: 31,
+        heroGradient: "from-green-500 via-teal-500 to-blue-500",
+      },
+      hackathonMarkdown
+    );
   }
 }
 
@@ -317,6 +333,10 @@ Build a DeFi protocol that solves real problems in the space. Our team decided t
 export const getBlogPost = (slug: string) => ContentManager.getPost(slug);
 export const getAllBlogPosts = () => ContentManager.getAllPosts();
 export const getBlogTags = () => ContentManager.getAllTags();
-export const addBlogPost = (slug: string, post: IDetailBlogPost) => ContentManager.addPost(slug, post);
-export const addBlogPostFromMarkdown = (slug: string, metadata: BlogPostMetadata, markdown: string) => 
-  ContentManager.addPostFromMarkdown(slug, metadata, markdown);
+export const addBlogPost = (slug: string, post: IDetailBlogPost) =>
+  ContentManager.addPost(slug, post);
+export const addBlogPostFromMarkdown = (
+  slug: string,
+  metadata: BlogPostMetadata,
+  markdown: string
+) => ContentManager.addPostFromMarkdown(slug, metadata, markdown);

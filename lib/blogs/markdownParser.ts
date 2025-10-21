@@ -28,9 +28,9 @@ export class MarkdownParser {
     // Process remaining text content
     this.processRemainingContent(processedMarkdown, content);
 
-    return content.filter(item => {
+    return content.filter((item) => {
       // Filter out empty text blocks
-      if (item.type === 'text' && (!item.content || item.content.trim() === '')) {
+      if (item.type === "text" && (!item.content || item.content.trim() === "")) {
         return false;
       }
       return true;
@@ -45,22 +45,25 @@ export class MarkdownParser {
         variant,
         content: text.trim(),
       });
-      return ''; // Remove from markdown
+      return ""; // Remove from markdown
     });
   }
 
   private static extractCodeBlocks(markdown: string, content: ILogContent[]): string {
-    return markdown.replace(this.CODE_BLOCK_REGEX, (match, language = 'text', options = '', code) => {
-      const optionsParsed = this.parseCodeOptions(options);
-      content.push({
-        type: "code",
-        content: code.trim(),
-        language,
-        fileName: optionsParsed.fileName,
-        highlightLines: optionsParsed.highlightLines,
-      });
-      return ''; // Remove from markdown
-    });
+    return markdown.replace(
+      this.CODE_BLOCK_REGEX,
+      (match, language = "text", options = "", code) => {
+        const optionsParsed = this.parseCodeOptions(options);
+        content.push({
+          type: "code",
+          content: code.trim(),
+          language,
+          fileName: optionsParsed.fileName,
+          highlightLines: optionsParsed.highlightLines,
+        });
+        return ""; // Remove from markdown
+      }
+    );
   }
 
   private static extractTimelines(markdown: string, content: ILogContent[]): string {
@@ -72,7 +75,7 @@ export class MarkdownParser {
           items,
         });
       }
-      return '';
+      return "";
     });
   }
 
@@ -85,23 +88,32 @@ export class MarkdownParser {
           items,
         });
       }
-      return '';
+      return "";
     });
   }
 
   private static extractTables(markdown: string, content: ILogContent[]): string {
     return markdown.replace(this.TABLE_REGEX, (match, headerRow, bodyRows) => {
-      const headers = headerRow.split('|').map((h: string) => h.trim()).filter((h: string) => h);
-      const rows = bodyRows.trim().split('\n').map((row: string) => 
-        row.split('|').map((cell: string) => cell.trim()).filter((cell: string) => cell)
-      );
+      const headers = headerRow
+        .split("|")
+        .map((h: string) => h.trim())
+        .filter((h: string) => h);
+      const rows = bodyRows
+        .trim()
+        .split("\n")
+        .map((row: string) =>
+          row
+            .split("|")
+            .map((cell: string) => cell.trim())
+            .filter((cell: string) => cell)
+        );
 
       content.push({
         type: "table",
         headers,
         rows,
       });
-      return '';
+      return "";
     });
   }
 
@@ -113,14 +125,14 @@ export class MarkdownParser {
         alt,
         caption,
       });
-      return '';
+      return "";
     });
   }
 
   private static processRemainingContent(markdown: string, content: ILogContent[]): void {
-    const lines = markdown.split('\n');
-    let currentBlock = '';
-    let blockType: 'text' | 'heading' | 'list' = 'text';
+    const lines = markdown.split("\n");
+    let currentBlock = "";
+    let blockType: "text" | "heading" | "list" = "text";
     let listItems: string[] = [];
 
     for (let i = 0; i < lines.length; i++) {
@@ -130,8 +142,8 @@ export class MarkdownParser {
       if (!line) {
         if (currentBlock.trim()) {
           this.addTextBlock(content, currentBlock.trim(), blockType);
-          currentBlock = '';
-          blockType = 'text';
+          currentBlock = "";
+          blockType = "text";
         }
         if (listItems.length > 0) {
           content.push({ type: "list", items: [...listItems] });
@@ -146,7 +158,7 @@ export class MarkdownParser {
         // Flush current block
         if (currentBlock.trim()) {
           this.addTextBlock(content, currentBlock.trim(), blockType);
-          currentBlock = '';
+          currentBlock = "";
         }
         if (listItems.length > 0) {
           content.push({ type: "list", items: [...listItems] });
@@ -155,7 +167,7 @@ export class MarkdownParser {
 
         const level = headingMatch[1].length;
         const text = headingMatch[2];
-        
+
         if (level === 1) {
           content.push({ type: "hero", content: text });
         } else if (level === 2) {
@@ -171,8 +183,8 @@ export class MarkdownParser {
       if (listMatch) {
         if (currentBlock.trim()) {
           this.addTextBlock(content, currentBlock.trim(), blockType);
-          currentBlock = '';
-          blockType = 'text';
+          currentBlock = "";
+          blockType = "text";
         }
         listItems.push(listMatch[1]);
         continue;
@@ -184,7 +196,7 @@ export class MarkdownParser {
         listItems = [];
       }
 
-      currentBlock += (currentBlock ? ' ' : '') + line;
+      currentBlock += (currentBlock ? " " : "") + line;
     }
 
     // Flush remaining content
@@ -196,15 +208,22 @@ export class MarkdownParser {
     }
   }
 
-  private static addTextBlock(content: ILogContent[], text: string, type: 'text' | 'heading' | 'subheading' | 'hero'): void {
+  private static addTextBlock(
+    content: ILogContent[],
+    text: string,
+    type: "text" | "heading" | "subheading" | "hero"
+  ): void {
     if (text.trim()) {
       content.push({ type, content: text });
     }
   }
 
-  private static parseCodeOptions(options: string): { fileName?: string; highlightLines?: number[] } {
+  private static parseCodeOptions(options: string): {
+    fileName?: string;
+    highlightLines?: number[];
+  } {
     const result: { fileName?: string; highlightLines?: number[] } = {};
-    
+
     if (!options) return result;
 
     // Parse fileName (file:example.ts)
@@ -217,11 +236,11 @@ export class MarkdownParser {
     const highlightMatch = options.match(/highlight:([0-9,-]+)/);
     if (highlightMatch) {
       const lines: number[] = [];
-      const parts = highlightMatch[1].split(',');
-      
-      parts.forEach(part => {
-        if (part.includes('-')) {
-          const [start, end] = part.split('-').map(Number);
+      const parts = highlightMatch[1].split(",");
+
+      parts.forEach((part) => {
+        if (part.includes("-")) {
+          const [start, end] = part.split("-").map(Number);
           for (let i = start; i <= end; i++) {
             lines.push(i);
           }
@@ -229,20 +248,22 @@ export class MarkdownParser {
           lines.push(Number(part));
         }
       });
-      
+
       result.highlightLines = lines;
     }
 
     return result;
   }
 
-  private static parseTimelineContent(content: string): Array<{ time: string; title: string; description: string }> {
+  private static parseTimelineContent(
+    content: string
+  ): Array<{ time: string; title: string; description: string }> {
     const items: Array<{ time: string; title: string; description: string }> = [];
-    const lines = content.trim().split('\n');
-    
+    const lines = content.trim().split("\n");
+
     for (const line of lines) {
       if (!line.trim()) continue;
-      
+
       // Expected format: "2024-01-01 | Setup | Initial project setup"
       const match = line.match(/^(.+?)\s*\|\s*(.+?)\s*\|\s*(.+)$/);
       if (match) {
@@ -253,19 +274,31 @@ export class MarkdownParser {
         });
       }
     }
-    
+
     return items;
   }
 
-  private static parseMetricsContent(content: string): Array<{ label: string; value: string | number; change?: string; trend?: "up" | "down" | "neutral" }> {
-    const items: Array<{ label: string; value: string | number; change?: string; trend?: "up" | "down" | "neutral" }> = [];
-    const lines = content.trim().split('\n');
-    
+  private static parseMetricsContent(content: string): Array<{
+    label: string;
+    value: string | number;
+    change?: string;
+    trend?: "up" | "down" | "neutral";
+  }> {
+    const items: Array<{
+      label: string;
+      value: string | number;
+      change?: string;
+      trend?: "up" | "down" | "neutral";
+    }> = [];
+    const lines = content.trim().split("\n");
+
     for (const line of lines) {
       if (!line.trim()) continue;
-      
+
       // Expected format: "Users | 1,234 | +12% | up"
-      const match = line.match(/^(.+?)\s*\|\s*(.+?)(?:\s*\|\s*(.+?))?(?:\s*\|\s*(up|down|neutral))?$/);
+      const match = line.match(
+        /^(.+?)\s*\|\s*(.+?)(?:\s*\|\s*(.+?))?(?:\s*\|\s*(up|down|neutral))?$/
+      );
       if (match) {
         items.push({
           label: match[1].trim(),
@@ -275,7 +308,7 @@ export class MarkdownParser {
         });
       }
     }
-    
+
     return items;
   }
 }

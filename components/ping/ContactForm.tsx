@@ -7,12 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { sendEmail } from "@/app/action/email";
-import { 
-  FormData, 
-  FormErrors, 
-  validateForm, 
-  validateField 
-} from "@/lib/form-validation";
+import { FormData, FormErrors, validateForm, validateField } from "@/lib/form-validation";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
@@ -22,15 +17,11 @@ export default function ContactForm() {
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<
-    Partial<Record<keyof FormData, boolean>>
-  >({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const fieldName = name as keyof FormData;
 
@@ -49,9 +40,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const fieldName = name as keyof FormData;
 
@@ -90,8 +79,7 @@ export default function ContactForm() {
         setTouched({});
       } else {
         setErrors({
-          general:
-            result.message || "Failed to send message. Please try again.",
+          general: result.message || "Failed to send message. Please try again.",
         });
       }
     } catch (error) {
@@ -104,18 +92,15 @@ export default function ContactForm() {
 
   // Check if form has errors
   const hasErrors = Object.values(errors).some((error) => error !== "");
-  const isFormValid =
-    !hasErrors && formData.name && formData.email && formData.content;
+  const isFormValid = !hasErrors && formData.name && formData.email && formData.content;
 
   if (submitted) {
     return (
-      <Card className="bg-green-500/10 border border-green-500/50">
-        <CardContent className="p-4 sm:p-6 text-center">
-          <Zap className="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-3 sm:mb-4 text-green-400" />
-          <h3 className="text-lg sm:text-xl font-bold text-green-400 mb-2">
-            MESSAGE_SENT
-          </h3>
-          <p className="text-white/70 font-mono text-xs sm:text-sm">
+      <Card className="border border-green-500/50 bg-green-500/10">
+        <CardContent className="p-4 text-center sm:p-6">
+          <Zap className="mx-auto mb-3 h-10 w-10 text-green-400 sm:mb-4 sm:h-12 sm:w-12" />
+          <h3 className="mb-2 text-lg font-bold text-green-400 sm:text-xl">MESSAGE_SENT</h3>
+          <p className="font-mono text-xs text-white/70 sm:text-sm">
             Connection established. I&apos;ll respond within 24 hours.
           </p>
         </CardContent>
@@ -127,19 +112,15 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" noValidate>
       {/* General error message */}
       {errors.general && (
-        <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/50 rounded-md">
-          <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0" />
-          <span className="text-red-400 text-xs sm:text-sm font-mono">
-            {errors.general}
-          </span>
+        <div className="flex items-center gap-2 rounded-md border border-red-500/50 bg-red-500/10 p-3">
+          <AlertCircle className="h-4 w-4 flex-shrink-0 text-red-400" />
+          <span className="font-mono text-xs text-red-400 sm:text-sm">{errors.general}</span>
         </div>
       )}
 
       {/* Name field */}
       <div className="space-y-2">
-        <label className="font-mono text-xs sm:text-sm text-white/70">
-          NAME *
-        </label>
+        <label className="font-mono text-xs text-white/70 sm:text-sm">NAME *</label>
         <div className="relative">
           <Input
             name="name"
@@ -155,11 +136,9 @@ export default function ContactForm() {
             maxLength={50}
           />
           {errors.name && touched.name && (
-            <div className="flex items-center gap-1 mt-1">
-              <AlertCircle className="w-3 h-3 text-red-400" />
-              <span className="text-red-400 text-xs font-mono break-words">
-                {errors.name}
-              </span>
+            <div className="mt-1 flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 text-red-400" />
+              <span className="font-mono text-xs break-words text-red-400">{errors.name}</span>
             </div>
           )}
         </div>
@@ -167,9 +146,7 @@ export default function ContactForm() {
 
       {/* Email field */}
       <div className="space-y-2">
-        <label className="font-mono text-xs sm:text-sm text-white/70">
-          EMAIL *
-        </label>
+        <label className="font-mono text-xs text-white/70 sm:text-sm">EMAIL *</label>
         <div className="relative">
           <Input
             name="email"
@@ -186,11 +163,9 @@ export default function ContactForm() {
             maxLength={100}
           />
           {errors.email && touched.email && (
-            <div className="flex items-center gap-1 mt-1">
-              <AlertCircle className="w-3 h-3 text-red-400" />
-              <span className="text-red-400 text-xs font-mono break-words">
-                {errors.email}
-              </span>
+            <div className="mt-1 flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 text-red-400" />
+              <span className="font-mono text-xs break-words text-red-400">{errors.email}</span>
             </div>
           )}
         </div>
@@ -198,13 +173,9 @@ export default function ContactForm() {
 
       {/* Message field */}
       <div className="space-y-2">
-        <div className="flex justify-between items-center">
-          <label className="font-mono text-xs sm:text-sm text-white/70">
-            MESSAGE *
-          </label>
-          <span className="font-mono text-xs text-white/50">
-            {formData.content.length}/1000
-          </span>
+        <div className="flex items-center justify-between">
+          <label className="font-mono text-xs text-white/70 sm:text-sm">MESSAGE *</label>
+          <span className="font-mono text-xs text-white/50">{formData.content.length}/1000</span>
         </div>
         <div className="relative">
           <Textarea
@@ -212,7 +183,7 @@ export default function ContactForm() {
             value={formData.content}
             onChange={handleInputChange}
             onBlur={handleBlur}
-            className={`bg-black/50 transition-colors min-h-[120px] resize-none ${
+            className={`min-h-[120px] resize-none bg-black/50 transition-colors ${
               errors.content && touched.content
                 ? "border-red-500 focus:border-red-500"
                 : "border-white/20 focus:border-pink-500"
@@ -221,11 +192,9 @@ export default function ContactForm() {
             maxLength={1000}
           />
           {errors.content && touched.content && (
-            <div className="flex items-center gap-1 mt-1">
-              <AlertCircle className="w-3 h-3 text-red-400" />
-              <span className="text-red-400 text-xs font-mono break-words">
-                {errors.content}
-              </span>
+            <div className="mt-1 flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 text-red-400" />
+              <span className="font-mono text-xs break-words text-red-400">{errors.content}</span>
             </div>
           )}
         </div>
@@ -237,17 +206,17 @@ export default function ContactForm() {
         className={`w-full font-mono transition-all ${
           isFormValid
             ? "bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-blue-500"
-            : "bg-gray-600 cursor-not-allowed"
+            : "cursor-not-allowed bg-gray-600"
         }`}
       >
         {isSubmitting ? (
           <>
-            <Zap className="w-4 h-4 mr-2 animate-spin" />
+            <Zap className="mr-2 h-4 w-4 animate-spin" />
             TRANSMITTING...
           </>
         ) : (
           <>
-            <Send className="w-4 h-4 mr-2" />
+            <Send className="mr-2 h-4 w-4" />
             SEND_MESSAGE
           </>
         )}

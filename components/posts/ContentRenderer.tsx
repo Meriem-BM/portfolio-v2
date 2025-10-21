@@ -13,15 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Terminal,
-  Copy,
-  Check,
-  TrendingUp,
-  TrendingDown,
-  Minus,
-  ExternalLink,
-} from "lucide-react";
+import { Terminal, Copy, Check, TrendingUp, TrendingDown, Minus, ExternalLink } from "lucide-react";
 
 interface ContentRendererProps {
   item: ILogContent;
@@ -51,9 +43,9 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "hero":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <div className="relative p-8 rounded-lg bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-green-900/20 border border-white/10">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-green-500/5 rounded-lg"></div>
-            <p className="relative text-xl leading-relaxed text-white/90 font-light">
+          <div className="relative rounded-lg border border-white/10 bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-green-900/20 p-8">
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/5 via-blue-500/5 to-green-500/5"></div>
+            <p className="relative text-xl leading-relaxed font-light text-white/90">
               {item.content}
             </p>
           </div>
@@ -62,36 +54,30 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
 
     case "heading":
       return (
-        <h2
-          className={`${baseClasses} text-3xl font-bold mb-6 flex items-center gap-3`}
-        >
-          <div className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-purple-400"></div>
+        <h2 className={`${baseClasses} mb-6 flex items-center gap-3 text-3xl font-bold`}>
+          <div className="h-8 w-1 bg-gradient-to-b from-cyan-400 to-purple-400"></div>
           {item.content}
         </h2>
       );
 
     case "subheading":
       return (
-        <h3
-          className={`${baseClasses} text-2xl font-semibold mb-4 flex items-center gap-3`}
-        >
-          <div className="w-0.5 h-6 bg-gradient-to-b from-green-400 to-blue-400"></div>
+        <h3 className={`${baseClasses} mb-4 flex items-center gap-3 text-2xl font-semibold`}>
+          <div className="h-6 w-0.5 bg-gradient-to-b from-green-400 to-blue-400"></div>
           {item.content}
         </h3>
       );
 
     case "text":
       return (
-        <p
-          className={`${baseClasses} text-white/80 leading-relaxed mb-6 text-lg`}
-        >
+        <p className={`${baseClasses} mb-6 text-lg leading-relaxed text-white/80`}>
           {item.content}
         </p>
       );
 
     case "markdown":
       return (
-        <div className={`${baseClasses} prose prose-invert max-w-none mb-6`}>
+        <div className={`${baseClasses} prose prose-invert mb-6 max-w-none`}>
           <div dangerouslySetInnerHTML={{ __html: item.content }} />
         </div>
       );
@@ -99,18 +85,13 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "code":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-black/80 border border-green-500/30 overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-green-500/20 bg-green-500/5">
+          <Card className="overflow-hidden border border-green-500/30 bg-black/80">
+            <div className="flex items-center justify-between border-b border-green-500/20 bg-green-500/5 p-4">
               <div className="flex items-center gap-3">
-                <Terminal className="w-4 h-4 text-green-400" />
-                <span className="font-mono text-sm text-green-400">
-                  {item.language}
-                </span>
+                <Terminal className="h-4 w-4 text-green-400" />
+                <span className="font-mono text-sm text-green-400">{item.language}</span>
                 {item.fileName && (
-                  <Badge
-                    variant="outline"
-                    className="text-xs border-green-500/30 text-green-300"
-                  >
+                  <Badge variant="outline" className="border-green-500/30 text-xs text-green-300">
                     {item.fileName}
                   </Badge>
                 )}
@@ -122,28 +103,24 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
                   onClick={() => copyToClipboard(item.content)}
                   className="h-7 w-7 p-0 text-green-400 hover:bg-green-500/10"
                 >
-                  {copied ? (
-                    <Check className="w-3 h-3" />
-                  ) : (
-                    <Copy className="w-3 h-3" />
-                  )}
+                  {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                 </Button>
                 <div className="flex gap-1">
-                  <div className="w-3 h-3 rounded-full bg-red-500/60"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/60"></div>
+                  <div className="h-3 w-3 rounded-full bg-red-500/60"></div>
+                  <div className="h-3 w-3 rounded-full bg-yellow-500/60"></div>
+                  <div className="h-3 w-3 rounded-full bg-green-500/60"></div>
                 </div>
               </div>
             </div>
             <CardContent className="p-0">
-              <pre className="p-6 overflow-x-auto">
-                <code className="text-green-300 font-mono text-sm leading-relaxed">
+              <pre className="overflow-x-auto p-6">
+                <code className="font-mono text-sm leading-relaxed text-green-300">
                   {item.content.split("\n").map((line, i) => (
                     <div
                       key={i}
                       className={`${
                         item.highlightLines?.includes(i + 1)
-                          ? "bg-green-500/10 border-l-2 border-green-400 pl-2 -ml-2"
+                          ? "-ml-2 border-l-2 border-green-400 bg-green-500/10 pl-2"
                           : ""
                       }`}
                     >
@@ -194,13 +171,9 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
                 <span className="text-2xl">{variant.icon}</span>
                 <div className="flex-1">
                   {item.title && (
-                    <h4 className={`${variant.text} font-semibold mb-2`}>
-                      {item.title}
-                    </h4>
+                    <h4 className={`${variant.text} mb-2 font-semibold`}>{item.title}</h4>
                   )}
-                  <p className={`${variant.text} leading-relaxed`}>
-                    {item.content}
-                  </p>
+                  <p className={`${variant.text} leading-relaxed`}>{item.content}</p>
                 </div>
               </div>
             </CardContent>
@@ -212,19 +185,13 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
       const ListComponent = item.ordered ? "ol" : "ul";
       return (
         <div className={`${baseClasses} mb-6`}>
-          <ListComponent
-            className={`space-y-3 ${
-              item.ordered ? "list-decimal list-inside" : ""
-            }`}
-          >
+          <ListComponent className={`space-y-3 ${item.ordered ? "list-inside list-decimal" : ""}`}>
             {item.items?.map((listItem: string, i: number) => (
               <li key={i} className="flex items-start gap-3 text-white/80">
                 {!item.ordered && (
-                  <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"></div>
                 )}
-                <span className={item.ordered ? "text-cyan-400 mr-2" : ""}>
-                  {listItem}
-                </span>
+                <span className={item.ordered ? "mr-2 text-cyan-400" : ""}>{listItem}</span>
               </li>
             ))}
           </ListComponent>
@@ -234,20 +201,18 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "image":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-black/50 border border-white/10 overflow-hidden">
+          <Card className="overflow-hidden border border-white/10 bg-black/50">
             <CardContent className="p-0">
               <Image
                 src={item.src}
                 alt={item.alt}
                 width={item.width || 800}
                 height={item.height || 600}
-                className="w-full h-auto"
+                className="h-auto w-full"
               />
               {item.caption && (
-                <div className="p-4 border-t border-white/10">
-                  <p className="text-sm text-white/60 text-center">
-                    {item.caption}
-                  </p>
+                <div className="border-t border-white/10 p-4">
+                  <p className="text-center text-sm text-white/60">{item.caption}</p>
                 </div>
               )}
             </CardContent>
@@ -258,19 +223,12 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "video":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-black/50 border border-white/10 overflow-hidden">
+          <Card className="overflow-hidden border border-white/10 bg-black/50">
             <CardContent className="p-0">
-              <video
-                src={item.src}
-                poster={item.poster}
-                controls
-                className="w-full h-auto"
-              />
+              <video src={item.src} poster={item.poster} controls className="h-auto w-full" />
               {item.caption && (
-                <div className="p-4 border-t border-white/10">
-                  <p className="text-sm text-white/60 text-center">
-                    {item.caption}
-                  </p>
+                <div className="border-t border-white/10 p-4">
+                  <p className="text-center text-sm text-white/60">{item.caption}</p>
                 </div>
               )}
             </CardContent>
@@ -281,9 +239,9 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "quote":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30">
+          <Card className="border border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
             <CardContent className="p-6">
-              <blockquote className="text-xl italic text-white/90 mb-4">
+              <blockquote className="mb-4 text-xl text-white/90 italic">
                 &quot;{item.content}&quot;
               </blockquote>
               {(item.author || item.source) && (
@@ -305,11 +263,11 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "table":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-black/50 border border-white/10 overflow-hidden">
+          <Card className="overflow-hidden border border-white/10 bg-black/50">
             <CardContent className="p-0">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-white/5 border-b border-white/10">
+                  <thead className="border-b border-white/10 bg-white/5">
                     <tr>
                       {item.headers.map((header, i) => (
                         <th
@@ -323,15 +281,9 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
                   </thead>
                   <tbody>
                     {item.rows.map((row, i) => (
-                      <tr
-                        key={i}
-                        className="border-b border-white/5 hover:bg-white/5"
-                      >
+                      <tr key={i} className="border-b border-white/5 hover:bg-white/5">
                         {row.map((cell, j) => (
-                          <td
-                            key={j}
-                            className="px-4 py-3 text-sm text-white/70"
-                          >
+                          <td key={j} className="px-4 py-3 text-sm text-white/70">
                             {cell}
                           </td>
                         ))}
@@ -341,10 +293,8 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
                 </table>
               </div>
               {item.caption && (
-                <div className="p-4 border-t border-white/10">
-                  <p className="text-sm text-white/60 text-center">
-                    {item.caption}
-                  </p>
+                <div className="border-t border-white/10 p-4">
+                  <p className="text-center text-sm text-white/60">{item.caption}</p>
                 </div>
               )}
             </CardContent>
@@ -356,22 +306,20 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
       return (
         <div className={`${baseClasses} mb-8`}>
           <div className="relative">
-            <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-green-500 via-blue-500 to-purple-500"></div>
+            <div className="absolute top-0 bottom-0 left-4 w-px bg-gradient-to-b from-green-500 via-blue-500 to-purple-500"></div>
             <div className="space-y-6">
               {item?.items?.map((timelineItem: ILogItem, i: number) => (
                 <div key={i} className="relative flex items-start gap-6">
-                  <div className="relative z-10 w-8 h-8 bg-black border-2 border-green-500 rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <div className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-green-500 bg-black">
+                    <div className="h-2 w-2 rounded-full bg-green-400"></div>
                   </div>
-                  <Card className="flex-1 bg-black/50 border border-white/10 hover:border-green-500/30 transition-colors">
+                  <Card className="flex-1 border border-white/10 bg-black/50 transition-colors hover:border-green-500/30">
                     <CardContent className="p-4">
-                      <div className="font-mono text-sm text-green-400 mb-1">
+                      <div className="mb-1 font-mono text-sm text-green-400">
                         {timelineItem.time}
                       </div>
-                      <h4 className="font-bold mb-2">{timelineItem.title}</h4>
-                      <p className="text-white/70 text-sm">
-                        {timelineItem.description}
-                      </p>
+                      <h4 className="mb-2 font-bold">{timelineItem.title}</h4>
+                      <p className="text-sm text-white/70">{timelineItem.description}</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -384,43 +332,33 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "metrics":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {item.items.map((metric, i) => (
               <Card
                 key={i}
-                className="bg-black/50 border border-white/10 hover:border-cyan-500/30 transition-colors"
+                className="border border-white/10 bg-black/50 transition-colors hover:border-cyan-500/30"
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="text-sm font-medium text-white/60">
-                      {metric.label}
-                    </h4>
+                  <div className="mb-2 flex items-center justify-between">
+                    <h4 className="text-sm font-medium text-white/60">{metric.label}</h4>
                     {metric.trend && (
                       <div
                         className={`flex items-center gap-1 text-xs ${
                           metric.trend === "up"
                             ? "text-green-400"
                             : metric.trend === "down"
-                            ? "text-red-400"
-                            : "text-gray-400"
+                              ? "text-red-400"
+                              : "text-gray-400"
                         }`}
                       >
-                        {metric.trend === "up" && (
-                          <TrendingUp className="w-3 h-3" />
-                        )}
-                        {metric.trend === "down" && (
-                          <TrendingDown className="w-3 h-3" />
-                        )}
-                        {metric.trend === "neutral" && (
-                          <Minus className="w-3 h-3" />
-                        )}
+                        {metric.trend === "up" && <TrendingUp className="h-3 w-3" />}
+                        {metric.trend === "down" && <TrendingDown className="h-3 w-3" />}
+                        {metric.trend === "neutral" && <Minus className="h-3 w-3" />}
                         {metric.change}
                       </div>
                     )}
                   </div>
-                  <div className="text-2xl font-bold text-cyan-400">
-                    {metric.value}
-                  </div>
+                  <div className="text-2xl font-bold text-cyan-400">{metric.value}</div>
                 </CardContent>
               </Card>
             ))}
@@ -432,8 +370,7 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
       const separatorStyles = {
         line: "border-t border-white/20",
         dots: "border-t border-dotted border-white/20",
-        gradient:
-          "h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent",
+        gradient: "h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent",
       };
 
       return (
@@ -445,7 +382,7 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "two-column":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div className="space-y-6">
               {item.left.map((leftItem, i) => (
                 <ContentRenderer key={`left-${i}`} item={leftItem} index={i} />
@@ -453,11 +390,7 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
             </div>
             <div className="space-y-6">
               {item.right.map((rightItem, i) => (
-                <ContentRenderer
-                  key={`right-${i}`}
-                  item={rightItem}
-                  index={i}
-                />
+                <ContentRenderer key={`right-${i}`} item={rightItem} index={i} />
               ))}
             </div>
           </div>
@@ -468,7 +401,7 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
       return (
         <div className={`${baseClasses} mb-8`}>
           <Tabs defaultValue={item.tabs[0]?.label} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-3 bg-black/50 border border-white/10">
+            <TabsList className="grid w-full grid-cols-2 border border-white/10 bg-black/50 lg:grid-cols-3">
               {item.tabs.map((tab, i) => (
                 <TabsTrigger
                   key={i}
@@ -483,11 +416,7 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
               <TabsContent key={i} value={tab.label} className="mt-6">
                 <div className="space-y-6">
                   {tab.content.map((tabItem, j) => (
-                    <ContentRenderer
-                      key={`tab-${i}-${j}`}
-                      item={tabItem}
-                      index={j}
-                    />
+                    <ContentRenderer key={`tab-${i}-${j}`} item={tabItem} index={j} />
                   ))}
                 </div>
               </TabsContent>
@@ -501,22 +430,14 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
         <div className={`${baseClasses} mb-8`}>
           <Accordion type="single" collapsible className="w-full">
             {item.items.map((accordionItem, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="border-white/10"
-              >
+              <AccordionItem key={i} value={`item-${i}`} className="border-white/10">
                 <AccordionTrigger className="text-white/80 hover:text-white">
                   {accordionItem.title}
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="space-y-6 pt-4">
                     {accordionItem.content.map((contentItem, j) => (
-                      <ContentRenderer
-                        key={`accordion-${i}-${j}`}
-                        item={contentItem}
-                        index={j}
-                      />
+                      <ContentRenderer key={`accordion-${i}-${j}`} item={contentItem} index={j} />
                     ))}
                   </div>
                 </AccordionContent>
@@ -529,22 +450,16 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "embed":
       return (
         <div className={`${baseClasses} mb-8`}>
-          <Card className="bg-black/50 border border-white/10 hover:border-blue-500/30 transition-colors">
+          <Card className="border border-white/10 bg-black/50 transition-colors hover:border-blue-500/30">
             <CardContent className="p-6">
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div>
-                  {item.title && (
-                    <h4 className="font-semibold text-white/90 mb-1">
-                      {item.title}
-                    </h4>
-                  )}
-                  {item.description && (
-                    <p className="text-sm text-white/60">{item.description}</p>
-                  )}
+                  {item.title && <h4 className="mb-1 font-semibold text-white/90">{item.title}</h4>}
+                  {item.description && <p className="text-sm text-white/60">{item.description}</p>}
                   {item.provider && (
                     <Badge
                       variant="outline"
-                      className="mt-2 text-xs border-blue-500/30 text-blue-300"
+                      className="mt-2 border-blue-500/30 text-xs text-blue-300"
                     >
                       {item.provider}
                     </Badge>
@@ -556,13 +471,11 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
                   onClick={() => window.open(item.url, "_blank")}
                   className="border-blue-500/30 text-blue-400 hover:bg-blue-500/10"
                 >
-                  <ExternalLink className="w-4 h-4 mr-2" />
+                  <ExternalLink className="mr-2 h-4 w-4" />
                   View
                 </Button>
               </div>
-              <div className="text-xs font-mono text-white/40 break-all">
-                {item.url}
-              </div>
+              <div className="font-mono text-xs break-all text-white/40">{item.url}</div>
             </CardContent>
           </Card>
         </div>
@@ -571,9 +484,9 @@ export const ContentRenderer = ({ item, index }: ContentRendererProps) => {
     case "interactive":
       return (
         <div className={`${baseClasses} mb-6`}>
-          <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/30 hover:border-pink-500/50 transition-all duration-300 cursor-pointer group">
+          <Card className="group cursor-pointer border border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20 transition-all duration-300 hover:border-pink-500/50">
             <CardContent className="p-6">
-              <p className="text-white/80 group-hover:text-white transition-colors group-hover:scale-105 transform duration-300">
+              <p className="transform text-white/80 transition-colors duration-300 group-hover:scale-105 group-hover:text-white">
                 {item.content}
               </p>
             </CardContent>

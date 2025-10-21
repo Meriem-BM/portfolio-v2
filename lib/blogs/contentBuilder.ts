@@ -103,10 +103,7 @@ export class ContentBuilder {
     return this;
   }
 
-  video(
-    src: string,
-    options?: { poster?: string; caption?: string }
-  ): ContentBuilder {
+  video(src: string, options?: { poster?: string; caption?: string }): ContentBuilder {
     this.content.push({
       type: "video",
       src,
@@ -129,9 +126,7 @@ export class ContentBuilder {
   }
 
   // Timeline
-  timeline(
-    items: Array<{ time: string; title: string; description: string }>
-  ): ContentBuilder {
+  timeline(items: Array<{ time: string; title: string; description: string }>): ContentBuilder {
     this.content.push({ type: "timeline", items });
     return this;
   }
@@ -156,10 +151,7 @@ export class ContentBuilder {
   }
 
   // Layout components
-  twoColumn(
-    leftContent: ILogContent[],
-    rightContent: ILogContent[]
-  ): ContentBuilder {
+  twoColumn(leftContent: ILogContent[], rightContent: ILogContent[]): ContentBuilder {
     this.content.push({
       type: "two-column",
       left: leftContent,
@@ -173,9 +165,7 @@ export class ContentBuilder {
     return this;
   }
 
-  accordion(
-    items: Array<{ title: string; content: ILogContent[] }>
-  ): ContentBuilder {
+  accordion(items: Array<{ title: string; content: ILogContent[] }>): ContentBuilder {
     this.content.push({ type: "accordion", items });
     return this;
   }
@@ -324,9 +314,7 @@ export class BlogPostBuilder {
       !this.post.tags ||
       !this.post.content
     ) {
-      throw new Error(
-        "Missing required fields: id, title, date, tags, content"
-      );
+      throw new Error("Missing required fields: id, title, date, tags, content");
     }
 
     return {
@@ -337,8 +325,7 @@ export class BlogPostBuilder {
       tags: this.post.tags,
       reactions: this.post.reactions || 0,
       readTime: this.post.readTime || "5 min",
-      heroGradient:
-        this.post.heroGradient || "from-blue-500 via-purple-500 to-cyan-500",
+      heroGradient: this.post.heroGradient || "from-blue-500 via-purple-500 to-cyan-500",
       content: this.post.content,
       author: this.post.author || { name: "", url: "" },
       slug: this.post.slug || "",
@@ -352,9 +339,7 @@ export class BlogPostBuilder {
 export const createBlogPost = () => new BlogPostBuilder();
 
 // Content validation utilities
-export const validateContent = (
-  content: ILogContent[]
-): { isValid: boolean; errors: string[] } => {
+export const validateContent = (content: ILogContent[]): { isValid: boolean; errors: string[] } => {
   const errors: string[] = [];
 
   content.forEach((item, index) => {
@@ -366,9 +351,7 @@ export const validateContent = (
         break;
       case "image":
         if (!item.src || !item.alt) {
-          errors.push(
-            `Image at index ${index} missing required src or alt text`
-          );
+          errors.push(`Image at index ${index} missing required src or alt text`);
         }
         break;
       case "table":

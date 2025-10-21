@@ -27,12 +27,15 @@ Traditional UI patterns exist for good reasons, but they can also limit our crea
 ## Experimental Techniques
 
 ### Micro-interactions
+
 Subtle animations that provide feedback and delight users.
 
 ### Novel Navigation
+
 Exploring alternatives to traditional menus and breadcrumbs.
 
 ### Visual Hierarchy
+
 Using unconventional layouts to guide user attention.
 
 ## Measuring Success

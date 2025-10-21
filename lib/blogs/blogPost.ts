@@ -13,8 +13,7 @@ export const blogPosts = [
   {
     id: 1,
     title: "Building with Viem: A Web3 Developer's Journey",
-    excerpt:
-      "Exploring the new paradigms in Web3 development and why viem is changing the game...",
+    excerpt: "Exploring the new paradigms in Web3 development and why viem is changing the game...",
     date: "2024-01-15",
     tags: ["frontend", "blockchain", "learning"],
     reactions: 24,
@@ -24,8 +23,7 @@ export const blogPosts = [
   {
     id: 2,
     title: "The Art of Experimental UI",
-    excerpt:
-      "How to push boundaries in interface design while maintaining usability...",
+    excerpt: "How to push boundaries in interface design while maintaining usability...",
     date: "2024-01-08",
     tags: ["design", "frontend", "ideas"],
     reactions: 18,
@@ -45,8 +43,7 @@ export const blogPosts = [
   {
     id: 4,
     title: "Framer Motion: Beyond Basic Animations",
-    excerpt:
-      "Advanced techniques for creating fluid, physics-based interactions...",
+    excerpt: "Advanced techniques for creating fluid, physics-based interactions...",
     date: "2023-12-20",
     tags: ["frontend", "animation", "tutorial"],
     reactions: 42,
