@@ -1,98 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
-import { AlertCircle, Send, Zap } from "lucide-react";
+import React from "react";
+import { AlertCircle, Send, Zap, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { sendEmail } from "@/app/action/email";
-import { FormData, FormErrors, validateForm, validateField } from "@/lib/form-validation";
+import { useContactForm } from "@/hooks/useContactForm";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    content: "",
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    const fieldName = name as keyof FormData;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (touched[fieldName]) {
-      const fieldError = validateField(fieldName, value);
-      setErrors((prev) => ({
-        ...prev,
-        [name]: fieldError,
-        general: "",
-      }));
-    }
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    const fieldName = name as keyof FormData;
-
-    setTouched((prev) => ({ ...prev, [name]: true }));
-
-    const fieldError = validateField(fieldName, value);
-    setErrors((prev) => ({
-      ...prev,
-      [name]: fieldError,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Mark all fields as touched
-    setTouched({ name: true, email: true, content: true });
-
-    // Validate entire form
-    const formErrors = validateForm(formData);
-    setErrors(formErrors);
-
-    // Check if there are any errors
-    if (Object.keys(formErrors).length > 0) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setErrors({});
-
-    try {
-      const result = await sendEmail(formData);
-      if (result.ok) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", content: "" });
-        setTouched({});
-      } else {
-        setErrors({
-          general: result.message || "Failed to send message. Please try again.",
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      setErrors({ general: "An unexpected error occurred. Please try again." });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // Check if form has errors
-  const hasErrors = Object.values(errors).some((error) => error !== "");
-  const isFormValid = !hasErrors && formData.name && formData.email && formData.content;
+  const {
+    formData,
+    errors,
+    touched,
+    isSubmitting,
+    isValidatingAI,
+    aiValidation,
+    submitted,
+    isFormValid,
+    handleInputChange,
+    handleBlur,
+    handleSubmit,
+  } = useContactForm();
 
   if (submitted) {
     return (
@@ -175,7 +104,15 @@ export default function ContactForm() {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="font-mono text-xs text-white/70 sm:text-sm">MESSAGE *</label>
-          <span className="font-mono text-xs text-white/50">{formData.content.length}/1000</span>
+          <div className="flex items-center gap-2">
+            {isValidatingAI && (
+              <div className="flex items-center gap-1">
+                <Sparkles className="h-3 w-3 animate-pulse text-purple-400" />
+                <span className="font-mono text-xs text-purple-400">AI checking...</span>
+              </div>
+            )}
+            <span className="font-mono text-xs text-white/50">{formData.content.length}/1000</span>
+          </div>
         </div>
         <div className="relative">
           <Textarea
@@ -186,7 +123,11 @@ export default function ContactForm() {
             className={`min-h-[120px] resize-none bg-black/50 transition-colors ${
               errors.content && touched.content
                 ? "border-red-500 focus:border-red-500"
-                : "border-white/20 focus:border-pink-500"
+                : aiValidation && !aiValidation.isValid
+                  ? "border-yellow-500 focus:border-yellow-500"
+                  : aiValidation && aiValidation.isValid
+                    ? "border-green-500 focus:border-green-500"
+                    : "border-white/20 focus:border-pink-500"
             }`}
             placeholder="Tell me about your project, idea, or just say hello..."
             maxLength={1000}
@@ -197,14 +138,53 @@ export default function ContactForm() {
               <span className="font-mono text-xs break-words text-red-400">{errors.content}</span>
             </div>
           )}
+          {!errors.content && aiValidation && (
+            <div
+              className={`mt-2 flex items-start gap-2 rounded-md border p-2 ${
+                aiValidation.isValid
+                  ? "border-green-500/50 bg-green-500/10"
+                  : "border-yellow-500/50 bg-yellow-500/10"
+              }`}
+            >
+              <Sparkles
+                className={`mt-0.5 h-3 w-3 flex-shrink-0 ${
+                  aiValidation.isValid ? "text-green-400" : "text-yellow-400"
+                }`}
+              />
+              <div className="flex-1">
+                <span
+                  className={`font-mono text-xs ${
+                    aiValidation.isValid ? "text-green-400" : "text-yellow-400"
+                  }`}
+                >
+                  {aiValidation.message}
+                </span>
+                {aiValidation.suggestions && (
+                  <p className="mt-1 font-mono text-xs text-white/60">{aiValidation.suggestions}</p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
+      {isValidatingAI && (
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-3 w-3 animate-pulse text-purple-400" />
+          <span className="font-mono text-xs text-purple-400">AI checking...</span>
+        </div>
+      )}
+
       <Button
         type="submit"
-        disabled={isSubmitting || !isFormValid}
+        disabled={
+          isSubmitting ||
+          !isFormValid ||
+          isValidatingAI ||
+          (aiValidation ? !aiValidation.isValid : false)
+        }
         className={`w-full font-mono transition-all ${
-          isFormValid
+          isFormValid && !isValidatingAI && (!aiValidation || aiValidation.isValid)
             ? "bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-blue-500"
             : "cursor-not-allowed bg-gray-600"
         }`}
