@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { blogPosts, blogTags } from "@/lib/blogs/blogPost";
+import { getAllBlogPosts, getBlogTags } from "@/lib/blogs/contentManager";
 import {
   pageVariants,
   tagVariants,
@@ -20,6 +20,9 @@ export default function LogsPage() {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [reactionClicked, setReactionClicked] = useState<string | null>(null);
 
+  const blogPosts = getAllBlogPosts();
+  const blogTags = getBlogTags();
+
   const filteredPosts = selectedTag
     ? blogPosts.filter((post) => post.tags.includes(selectedTag))
     : blogPosts;
@@ -31,7 +34,7 @@ export default function LogsPage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-black text-white relative overflow-hidden"
+      className="relative min-h-screen overflow-hidden bg-black text-white"
       initial="initial"
       animate="animate"
       variants={pageVariants}
@@ -58,13 +61,13 @@ export default function LogsPage() {
       </motion.div>
 
       <motion.div
-        className="fixed inset-0 opacity-10 pointer-events-none"
+        className="pointer-events-none fixed inset-0 opacity-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
         transition={{ duration: 2 }}
       >
         <motion.div
-          className="w-full h-full"
+          className="h-full w-full"
           style={{
             backgroundImage: `
               linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
@@ -84,7 +87,7 @@ export default function LogsPage() {
       </motion.div>
 
       {/* Header */}
-      <PageHeader 
+      <PageHeader
         title="LOGS"
         description="Field notes from the digital frontier"
         statusText="SYNCED"
@@ -94,26 +97,22 @@ export default function LogsPage() {
 
       {/* Tag filters */}
       <motion.div
-        className="relative z-10 px-6 mb-8 mt-4"
+        className="relative z-10 mt-4 mb-8 px-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.6 }}
       >
         <motion.div
-          className="flex flex-wrap gap-2 max-w-4xl mx-auto"
+          className="mx-auto flex max-w-4xl flex-wrap gap-2"
           variants={staggerContainer}
           animate="animate"
         >
-          <motion.div
-            variants={tagVariants}
-            whileHover="hover"
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div variants={tagVariants} whileHover="hover" whileTap={{ scale: 0.95 }}>
             <Button
               variant={selectedTag === null ? "default" : "outline"}
               size="sm"
               onClick={() => setSelectedTag(null)}
-              className="font-mono text-xs border-white/30"
+              className="border-white/30 font-mono text-xs"
             >
               ALL
             </Button>
@@ -129,7 +128,7 @@ export default function LogsPage() {
                 variant={selectedTag === tag ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedTag(tag)}
-                className="font-mono text-xs border-white/30"
+                className="border-white/30 font-mono text-xs"
               >
                 #{tag}
               </Button>
@@ -146,7 +145,7 @@ export default function LogsPage() {
         transition={{ delay: 1, duration: 0.8 }}
       >
         <motion.div
-          className="grid gap-6 max-w-4xl mx-auto"
+          className="mx-auto grid max-w-4xl gap-6"
           variants={staggerContainer}
           animate="animate"
         >
@@ -171,7 +170,7 @@ export default function LogsPage() {
 
         {/* Interactive reaction demo */}
         <motion.div
-          className="text-center mt-12"
+          className="mt-12 text-center"
           variants={floatVariants}
           animate="animate"
           initial={{ opacity: 0, y: 50 }}
@@ -179,7 +178,7 @@ export default function LogsPage() {
           transition={{ delay: 0.5, duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="inline-block p-6 border border-dashed border-white/20 rounded-lg relative overflow-hidden">
+          <div className="relative inline-block overflow-hidden rounded-lg border border-dashed border-white/20 p-6">
             <AnimatePresence>
               {reactionClicked && (
                 <motion.div
@@ -192,14 +191,11 @@ export default function LogsPage() {
               )}
             </AnimatePresence>
 
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Zap className="w-8 h-8 mx-auto mb-4 text-white/40" />
+            <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+              <Zap className="mx-auto mb-4 h-8 w-8 text-white/40" />
             </motion.div>
             <motion.p
-              className="font-mono text-white/60 text-sm mb-4"
+              className="mb-4 font-mono text-sm text-white/60"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -207,7 +203,7 @@ export default function LogsPage() {
               React to posts with visual effects
             </motion.p>
             <motion.div
-              className="flex gap-2 justify-center"
+              className="flex justify-center gap-2"
               variants={staggerContainer}
               animate="animate"
             >

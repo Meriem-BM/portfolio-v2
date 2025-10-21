@@ -1,12 +1,6 @@
 import { Award, Code, Users } from "lucide-react";
 
-export const communities = [
-  "Giveth",
-  "Pairwise",
-  "Alchemy",
-  "Encode Club",
-  "Lens Protocol",
-];
+export const communities = ["Giveth", "Pairwise", "Alchemy", "Encode Club", "Lens Protocol"];
 
 export const timelineEvents = [
   {
@@ -16,14 +10,7 @@ export const timelineEvents = [
     company: "ETHGlobal",
     type: "achievement",
     description: "Built a AI-powered trading bot",
-    tech: [
-      "Solidity",
-      "Typescript",
-      "Next.js",
-      "Vercel",
-      "PostgreSQL",
-      "Drizzle",
-    ],
+    tech: ["Solidity", "Typescript", "Next.js", "Vercel", "PostgreSQL", "Drizzle"],
     icon: Award,
   },
   {
@@ -42,8 +29,7 @@ export const timelineEvents = [
     title: "Mid Software Engineer",
     company: "General Magic",
     type: "work",
-    description:
-      "Working on Giveth, Pairwise, and WorldView Quadratic voting World Mini-App",
+    description: "Working on Giveth, Pairwise, and WorldView Quadratic voting World Mini-App",
     tech: [
       "TypeScript",
       "React",
@@ -80,17 +66,7 @@ export const timelineEvents = [
     company: "Mamane.Tech",
     type: "work",
     description: "Built various web apps for clients",
-    tech: [
-      "React",
-      "Node.js",
-      "Next.js",
-      "MySQL",
-      "Prisma",
-      "tRPC",
-      "CI/CD",
-      "Docker",
-      "AWS",
-    ],
+    tech: ["React", "Node.js", "Next.js", "MySQL", "Prisma", "tRPC", "CI/CD", "Docker", "AWS"],
     icon: Code,
   },
   {
@@ -100,15 +76,7 @@ export const timelineEvents = [
     company: "Big M Solutions",
     type: "work",
     description: "Built a web app for a client",
-    tech: [
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Vue.js",
-      "ArangoDB",
-      "Docker",
-      "Nginx",
-    ],
+    tech: ["Node.js", "Express", "MongoDB", "Vue.js", "ArangoDB", "Docker", "Nginx"],
     icon: Code,
   },
 ];
