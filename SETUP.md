@@ -13,13 +13,12 @@ Your portfolio now has a powerful cross-posting system that can automatically pu
 ## 🔑 Required API Keys
 
 ### 1. Hashnode Setup
+
 1. Go to [Hashnode](https://hashnode.com) and log in
 2. Navigate to your publication settings
 3. Go to the "API" section
 4. Generate a new API token
 5. Note your publication ID from the URL (e.g., `https://hashnode.com/@username` → publication ID)
-
-
 
 ## 🛠️ Configuration Steps
 
@@ -75,11 +74,13 @@ Your markdown content here...
 ### Command Line
 
 #### Cross-post to all platforms:
+
 ```bash
 yarn cross-post my-awesome-post https://mac-portfolio.vercel.app/posts/my-awesome-post draft
 ```
 
 #### Publish to specific platform:
+
 ```bash
 yarn publish-hashnode my-awesome-post https://mac-portfolio.vercel.app/posts/my-awesome-post
 ```
@@ -99,8 +100,8 @@ yarn publish-hashnode my-awesome-post https://mac-portfolio.vercel.app/posts/my-
 ## 📊 Platform Features
 
 | Platform | Content Format | Canonical URL | API Type |
-|----------|----------------|---------------|----------|
-| Hashnode | Markdown | ✅ Supported | GraphQL |
+| -------- | -------------- | ------------- | -------- |
+| Hashnode | Markdown       | ✅ Supported  | GraphQL  |
 
 ## 🚨 Troubleshooting
 

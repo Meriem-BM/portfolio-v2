@@ -23,32 +23,30 @@ export default function NavBar() {
   }, []);
 
   return (
-    <nav className="relative z-10 p-6 flex sm:flex-row flex-col gap-6 sm:gap-0 justify-between items-center">
-      <div className="font-mono text-sm text-green-400">
-        [{currentTime}] SYSTEM_ACTIVE
-      </div>
+    <nav className="relative z-10 flex flex-col items-center justify-between gap-6 p-6 sm:flex-row sm:gap-0">
+      <div className="font-mono text-sm text-green-400">[{currentTime}] SYSTEM_ACTIVE</div>
       <div className="flex gap-6">
         <Link
           href="/loops"
-          className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
+          className="hover:glitch font-mono text-sm text-white/70 transition-colors hover:text-white"
         >
           LOOPS
         </Link>
         <Link
           href="/logs"
-          className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
+          className="hover:glitch font-mono text-sm text-white/70 transition-colors hover:text-white"
         >
           LOGS
         </Link>
         <Link
           href="/trace"
-          className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
+          className="hover:glitch font-mono text-sm text-white/70 transition-colors hover:text-white"
         >
           TRACE
         </Link>
         <Link
           href="/ping"
-          className="text-white/70 hover:text-white transition-colors font-mono text-sm hover:glitch"
+          className="hover:glitch font-mono text-sm text-white/70 transition-colors hover:text-white"
         >
           PING
         </Link>

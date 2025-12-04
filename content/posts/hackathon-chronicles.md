@@ -32,15 +32,19 @@ Build a DeFi protocol that solves real problems in the space. Our team decided t
 ## Key Learnings
 
 ### 1. **Scope Creep is Real**
+
 We started with a simple DEX aggregator and ended up building a cross-chain bridge. Stay focused on the MVP.
 
 ### 2. **Sleep Matters**
+
 Even 2-3 hours makes a difference. Your brain needs rest to solve complex problems.
 
 ### 3. **Team Communication**
+
 Regular check-ins prevent conflicts and keep everyone aligned.
 
 ### 4. **Technical Debt is OK**
+
 In a hackathon, getting something working is more important than perfect code.
 
 ## The Result
@@ -51,6 +55,7 @@ In a hackathon, getting something working is more important than perfect code.
 ## What We Built
 
 A cross-chain liquidity aggregator that:
+
 - Connects to multiple DEXs across chains
 - Finds the best swap routes
 - Handles cross-chain transactions

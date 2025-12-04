@@ -60,35 +60,35 @@ export default function PageHeader({
   const colors = colorVariants[accentColor];
 
   return (
-    <header className="relative z-10 p-4 sm:p-6 border-b border-white/10 backdrop-blur-sm">
+    <header className="relative z-10 border-b border-white/10 p-4 backdrop-blur-sm sm:p-6">
       <div
         className={cn(
-          "max-w-4xl mx-auto",
+          "mx-auto max-w-4xl",
           maxWidth === "7xl" && "max-w-7xl",
           maxWidth === "6xl" && "max-w-6xl",
           maxWidth === "5xl" && "max-w-5xl"
         )}
       >
         {/* Navigation breadcrumb */}
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <div className="mb-4 flex items-center justify-between sm:mb-6">
           {showBackButton && (
             <Link
               href="/"
               className={cn(
                 "inline-flex items-center text-white/70",
                 colors.hover,
-                "transition-colors font-mono text-xs sm:text-sm group"
+                "group font-mono text-xs transition-colors sm:text-sm"
               )}
             >
-              <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
               <span className="relative">
                 <span className="hidden sm:inline">BACK_TO_ROOT</span>
                 <span className="sm:hidden">BACK</span>
                 <span
                   className={cn(
-                    "absolute -bottom-1 left-0 w-0 h-px",
+                    "absolute -bottom-1 left-0 h-px w-0",
                     colors.underline,
-                    "group-hover:w-full transition-all duration-300"
+                    "transition-all duration-300 group-hover:w-full"
                   )}
                 ></span>
               </span>
@@ -96,36 +96,28 @@ export default function PageHeader({
           )}
 
           {/* Status indicator */}
-          <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
+          <div className="flex items-center gap-1 font-mono text-xs sm:gap-2">
             <div
               className={cn(
                 "flex items-center gap-1",
                 accentColor === "pink"
                   ? "text-pink-400"
                   : accentColor === "green"
-                  ? "text-green-400"
-                  : accentColor === "orange"
-                  ? "text-orange-400"
-                  : accentColor === "blue"
-                  ? "text-blue-400"
-                  : "text-purple-400"
+                    ? "text-green-400"
+                    : accentColor === "orange"
+                      ? "text-orange-400"
+                      : accentColor === "blue"
+                        ? "text-blue-400"
+                        : "text-purple-400"
               )}
             >
-              <div
-                className={cn(
-                  "w-2 h-2",
-                  colors.accent,
-                  "rounded-full animate-pulse"
-                )}
-              ></div>
-              <span className="hidden xs:inline">{statusText}</span>
+              <div className={cn("h-2 w-2", colors.accent, "animate-pulse rounded-full")}></div>
+              <span className="xs:inline hidden">{statusText}</span>
             </div>
             {statusInfo && (
               <>
-                <span className="text-white/40 hidden sm:inline">|</span>
-                <span className="text-white/60 hidden md:inline">
-                  {statusInfo}
-                </span>
+                <span className="hidden text-white/40 sm:inline">|</span>
+                <span className="hidden text-white/60 md:inline">{statusInfo}</span>
               </>
             )}
           </div>
@@ -134,18 +126,13 @@ export default function PageHeader({
         {/* Page title and description */}
         <div className="flex flex-col">
           <div>
-            <div className="flex items-center gap-2 sm:gap-3 mb-2">
-              <div
-                className={cn(
-                  "w-1 h-6 sm:h-8 bg-gradient-to-b",
-                  colors.gradient
-                )}
-              ></div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black glitch-text">
+            <div className="mb-2 flex items-center gap-2 sm:gap-3">
+              <div className={cn("h-6 w-1 bg-gradient-to-b sm:h-8", colors.gradient)}></div>
+              <h1 className="glitch-text text-3xl font-black sm:text-4xl md:text-5xl lg:text-6xl">
                 {title}
               </h1>
             </div>
-            <p className="text-white/60 font-mono text-sm sm:text-base lg:text-lg ml-3 sm:ml-4">
+            <p className="ml-3 font-mono text-sm text-white/60 sm:ml-4 sm:text-base lg:text-lg">
               {description}
             </p>
           </div>

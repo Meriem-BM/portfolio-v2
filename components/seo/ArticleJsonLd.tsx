@@ -1,13 +1,7 @@
 import { IDetailBlogPost } from "@/types";
 import { site } from "@/lib/seo";
 
-export function ArticleJsonLd({
-  post,
-  url,
-}: {
-  post: IDetailBlogPost;
-  url: string;
-}) {
+export function ArticleJsonLd({ post, url }: { post: IDetailBlogPost; url: string }) {
   const data = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -22,9 +16,6 @@ export function ArticleJsonLd({
     image: post.cover ?? `${site.url}/og/${post.slug}`,
   };
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   );
 }

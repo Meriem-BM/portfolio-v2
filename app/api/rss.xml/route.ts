@@ -23,10 +23,10 @@ export async function GET() {
         <pubDate>${new Date(p.date).toUTCString()}</pubDate>
         <description><![CDATA[${p.excerpt ?? p.summary ?? ""}]]></description>
         </item>`
-            )
-            .join("");
+    )
+    .join("");
 
-        const rss = `<?xml version="1.0" encoding="UTF-8"?>
+  const rss = `<?xml version="1.0" encoding="UTF-8"?>
         <rss version="2.0">
         <channel>
         <title>${escapeXml(site.name)}</title>

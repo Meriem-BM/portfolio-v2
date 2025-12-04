@@ -19,7 +19,7 @@ export default function TracePage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-black text-white relative"
+      className="relative min-h-screen bg-black text-white"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -36,13 +36,13 @@ export default function TracePage() {
 
       {/* Grid pattern overlay */}
       <motion.div
-        className="fixed inset-0 opacity-10 pointer-events-none"
+        className="pointer-events-none fixed inset-0 opacity-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.1 }}
         transition={{ duration: 1.5, delay: 0.5 }}
       >
         <div
-          className="w-full h-full"
+          className="h-full w-full"
           style={{
             backgroundImage: `
         linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
@@ -54,7 +54,7 @@ export default function TracePage() {
       </motion.div>
 
       {/* Header */}
-      <PageHeader 
+      <PageHeader
         title="TRACE"
         description="Journey through time and code"
         statusText="TRACED"
@@ -64,11 +64,11 @@ export default function TracePage() {
 
       <main className="relative z-10 p-6">
         {/* Timeline */}
-        <motion.div className="max-w-4xl mx-auto" variants={containerVariants}>
+        <motion.div className="mx-auto max-w-4xl" variants={containerVariants}>
           <div className="relative">
             {/* Timeline line */}
             <motion.div
-              className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-orange-500 via-red-500 to-purple-500"
+              className="absolute top-0 bottom-0 left-8 w-px bg-gradient-to-b from-orange-500 via-red-500 to-purple-500"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "100%", opacity: 1 }}
               transition={{ duration: 1.5, delay: 0.5 }}
@@ -90,7 +90,7 @@ export default function TracePage() {
                   >
                     {/* Timeline dot */}
                     <motion.div
-                      className="relative z-10 flex items-center justify-center w-16 h-16 bg-black border-2 border-orange-500 rounded-full"
+                      className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-orange-500 bg-black"
                       whileHover={{
                         scale: 1.1,
                         borderColor: "#ff6b35",
@@ -104,29 +104,23 @@ export default function TracePage() {
                         }}
                         transition={{ duration: 0.5 }}
                       >
-                        <IconComponent className="w-6 h-6 text-orange-400" />
+                        <IconComponent className="h-6 w-6 text-orange-400" />
                       </motion.div>
                     </motion.div>
 
                     {/* Event card */}
-                    <motion.div
-                      className="flex-1"
-                      variants={cardVariants}
-                      whileHover="hover"
-                    >
+                    <motion.div className="flex-1" variants={cardVariants} whileHover="hover">
                       <Card
-                        className={`bg-black/50 border transition-all duration-300 ${
-                          hoveredEvent === event.id
-                            ? "border-orange-500/50"
-                            : "border-white/10"
+                        className={`border bg-black/50 transition-all duration-300 ${
+                          hoveredEvent === event.id ? "border-orange-500/50" : "border-white/10"
                         }`}
                       >
                         <CardContent className="p-6">
                           {/* Event header */}
-                          <div className="flex items-start justify-between mb-4">
+                          <div className="mb-4 flex items-start justify-between">
                             <div>
                               <motion.div
-                                className="flex items-center gap-2 mb-2"
+                                className="mb-2 flex items-center gap-2"
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: index * 0.1 + 0.3 }}
@@ -135,12 +129,12 @@ export default function TracePage() {
                                   {event.year}
                                 </span>
                                 <motion.span
-                                  className={`px-2 py-1 rounded text-xs font-mono ${
+                                  className={`rounded px-2 py-1 font-mono text-xs ${
                                     event.type === "work"
                                       ? "bg-blue-500/20 text-blue-400"
                                       : event.type === "achievement"
-                                      ? "bg-green-500/20 text-green-400"
-                                      : "bg-purple-500/20 text-purple-400"
+                                        ? "bg-green-500/20 text-green-400"
+                                        : "bg-purple-500/20 text-purple-400"
                                   }`}
                                   whileHover={{ scale: 1.05 }}
                                 >
@@ -148,7 +142,7 @@ export default function TracePage() {
                                 </motion.span>
                               </motion.div>
                               <motion.h3
-                                className="text-xl font-bold mb-1"
+                                className="mb-1 text-xl font-bold"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: index * 0.1 + 0.4 }}
@@ -156,7 +150,7 @@ export default function TracePage() {
                                 {event.title}
                               </motion.h3>
                               <motion.p
-                                className="text-white/60 font-mono text-sm"
+                                className="font-mono text-sm text-white/60"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: index * 0.1 + 0.5 }}
@@ -168,7 +162,7 @@ export default function TracePage() {
 
                           {/* Description */}
                           <motion.p
-                            className="text-white/70 mb-4"
+                            className="mb-4 text-white/70"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: index * 0.1 + 0.6 }}
@@ -186,7 +180,7 @@ export default function TracePage() {
                             {event.tech.map((tech, techIndex) => (
                               <motion.span
                                 key={tech}
-                                className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-white/60"
+                                className="rounded border border-white/10 bg-white/5 px-2 py-1 font-mono text-xs text-white/60"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{
@@ -213,22 +207,19 @@ export default function TracePage() {
 
         {/* Communities section */}
         <motion.div
-          className="max-w-4xl mx-auto mt-16"
+          className="mx-auto mt-16 max-w-4xl"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <motion.div
-            className="flex items-center gap-3 mb-8"
-            variants={itemVariants}
-          >
+          <motion.div className="mb-8 flex items-center gap-3" variants={itemVariants}>
             <motion.div
-              className="w-1 h-8 bg-gradient-to-b from-purple-400 to-pink-400"
+              className="h-8 w-1 bg-gradient-to-b from-purple-400 to-pink-400"
               initial={{ height: 0 }}
               animate={{ height: 32 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             />
-            <h2 className="text-2xl font-bold flex items-center gap-2">
+            <h2 className="flex items-center gap-2 text-2xl font-bold">
               <motion.div
                 animate={{ rotate: [0, 10, 0] }}
                 transition={{
@@ -237,44 +228,44 @@ export default function TracePage() {
                   ease: "easeInOut",
                 }}
               >
-                <Users className="w-6 h-6 text-purple-400" />
+                <Users className="h-6 w-6 text-purple-400" />
               </motion.div>
               COMMUNITIES
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {communities.map((community, index) => (
               <Card
                 key={community}
-                className="bg-black/50 border border-white/10 hover:border-purple-500/50 transition-all duration-300 transform hover:scale-105 group cursor-pointer"
+                className="group transform cursor-pointer border border-white/10 bg-black/50 transition-all duration-300 hover:scale-105 hover:border-purple-500/50"
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}
               >
-                <CardContent className="p-6 text-center relative overflow-hidden">
+                <CardContent className="relative overflow-hidden p-6 text-center">
                   {/* Animated background gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                   {/* Community icon */}
-                  <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <div className="w-6 h-6 bg-white rounded-full opacity-80"></div>
+                  <div className="relative z-10 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-transform duration-300 group-hover:scale-110">
+                    <div className="h-6 w-6 rounded-full bg-white opacity-80"></div>
                   </div>
 
                   {/* Community name */}
-                  <h3 className="relative z-10 font-mono text-sm text-white/70 group-hover:text-white transition-colors duration-300 mb-2">
+                  <h3 className="relative z-10 mb-2 font-mono text-sm text-white/70 transition-colors duration-300 group-hover:text-white">
                     {community}
                   </h3>
 
                   {/* Status indicator */}
-                  <div className="relative z-10 flex items-center justify-center gap-1 text-xs font-mono text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="relative z-10 flex items-center justify-center gap-1 font-mono text-xs text-purple-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400"></div>
                     ACTIVE
                   </div>
 
                   {/* Decorative elements */}
-                  <div className="absolute top-2 right-2 w-2 h-2 bg-purple-400/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-2 left-2 w-1 h-1 bg-pink-400/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-purple-400/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                  <div className="absolute bottom-2 left-2 h-1 w-1 rounded-full bg-pink-400/30 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
                 </CardContent>
               </Card>
             ))}
@@ -287,17 +278,14 @@ export default function TracePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.5 }}
           >
-            <motion.div
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Card className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-dashed border-purple-500/30 hover:border-purple-500/50 transition-all duration-300 cursor-pointer group">
+            <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}>
+              <Card className="group cursor-pointer border border-dashed border-purple-500/30 bg-gradient-to-r from-purple-900/20 to-pink-900/20 transition-all duration-300 hover:border-purple-500/50">
                 <CardContent className="p-6">
-                  <div className="flex items-center justify-center gap-3 text-purple-400 group-hover:text-purple-300 transition-colors">
-                    <Users className="w-5 h-5" />
+                  <div className="flex items-center justify-center gap-3 text-purple-400 transition-colors group-hover:text-purple-300">
+                    <Users className="h-5 w-5" />
                     <span className="font-mono text-sm">JOIN_THE_NETWORK</span>
                   </div>
-                  <p className="text-white/60 text-xs mt-2 font-mono">
+                  <p className="mt-2 font-mono text-xs text-white/60">
                     Always looking for new communities to contribute to
                   </p>
                 </CardContent>
@@ -308,13 +296,13 @@ export default function TracePage() {
 
         {/* Stats */}
         <motion.div
-          className="max-w-4xl mx-auto mt-16"
+          className="mx-auto mt-16 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8 }}
         >
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            className="grid grid-cols-2 gap-6 md:grid-cols-4"
             variants={containerVariants}
           >
             {[
@@ -329,7 +317,7 @@ export default function TracePage() {
                 whileHover="hover"
                 custom={index}
               >
-                <Card className="bg-black/50 border border-white/10 text-center">
+                <Card className="border border-white/10 bg-black/50 text-center">
                   <CardContent className="p-6">
                     <motion.div
                       className={`text-3xl font-bold ${stat.color} mb-2`}

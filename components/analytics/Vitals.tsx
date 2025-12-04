@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export default function Vitals() {
   useEffect(() => {
     import("web-vitals").then(({ onCLS, onLCP, onINP, onTTFB }) => {
-      const send = (metric: import('web-vitals').Metric) => {
+      const send = (metric: import("web-vitals").Metric) => {
         const body = JSON.stringify({
           ...metric,
           path: location.pathname,

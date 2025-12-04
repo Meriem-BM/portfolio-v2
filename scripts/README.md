@@ -27,22 +27,23 @@ HASHNODE_PUBLICATION_ID=your_publication_id_here
 ### How to Get API Keys
 
 #### Hashnode
+
 1. Go to [Hashnode](https://hashnode.com) and log in
 2. Navigate to your publication settings
 3. Go to the "API" section
 4. Generate a new API token
 5. Note your publication ID from the URL
 
-
-
 ## 🛠️ Installation
 
 1. Install dependencies:
+
 ```bash
 yarn install
 ```
 
 2. The scripts will be available as npm scripts:
+
 ```bash
 yarn cross-post <slug> <canonical-url> [publish-status]
 yarn publish-hashnode <slug> <canonical-url>
@@ -53,11 +54,13 @@ yarn publish-hashnode <slug> <canonical-url>
 ### Command Line
 
 #### Cross-post to all platforms:
+
 ```bash
 yarn cross-post my-awesome-post https://yoursite.com/posts/my-awesome-post draft
 ```
 
 #### Publish to specific platform:
+
 ```bash
 yarn publish-hashnode my-awesome-post https://yoursite.com/posts/my-awesome-post
 ```
@@ -130,12 +133,12 @@ Add `DEBUG=true` to your environment variables for verbose logging.
 ### Testing
 
 Test with a draft post first:
+
 ```bash
 yarn cross-post test-post https://yoursite.com/posts/test-post draft
 ```
 
 ## 🔮 Future Enhancements
-
 
 - [ ] Content scheduling
 - [ ] Analytics tracking
@@ -145,7 +148,6 @@ yarn cross-post test-post https://yoursite.com/posts/test-post draft
 ## 📚 API References
 
 - [Hashnode GraphQL API](https://gql.hashnode.com)
-
 
 ## 🤝 Contributing
 

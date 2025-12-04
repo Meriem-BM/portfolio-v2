@@ -1,15 +1,17 @@
 import { test, expect } from "@playwright/test";
 
-async function getPostUrls(request: import('@playwright/test').APIRequestContext, base: string) {
+async function getPostUrls(request: import("@playwright/test").APIRequestContext, base: string) {
   const res = await request.get(`${base}/sitemap.xml`);
   expect(res.status()).toBe(200);
   const xml = await res.text();
-  const urls = Array.from(xml.matchAll(/<loc>(.*?)<\/loc>/g)).map((m) => (m as RegExpMatchArray)[1]);
+  const urls = Array.from(xml.matchAll(/<loc>(.*?)<\/loc>/g)).map(
+    (m) => (m as RegExpMatchArray)[1]
+  );
   // Convert absolute URLs to relative URLs for local testing
   return urls
     .filter((u) => /\/logs\//.test(u))
     .map((u) => {
-      if (u.startsWith('http')) {
+      if (u.startsWith("http")) {
         const url = new URL(u);
         return url.pathname;
       }
@@ -44,7 +46,9 @@ test.describe("SEO surface", () => {
       // canonical
       const canonical = url.replace(/\/$/, "");
       // The canonical URL in HTML is absolute, so we need to check for the full URL
-      const expectedCanonical = canonical.startsWith('http') ? canonical : `https://meoumi.dev${canonical}`;
+      const expectedCanonical = canonical.startsWith("http")
+        ? canonical
+        : `https://meoumi.dev${canonical}`;
       expect(html).toContain(`<link rel="canonical" href="${expectedCanonical}"`);
 
       // meta description ~ 50-200 chars
@@ -53,9 +57,7 @@ test.describe("SEO surface", () => {
       // Open Graph + Twitter
       expect(html).toMatch(/<meta property="og:title" content=".+?"/);
       expect(html).toMatch(/<meta property="og:image" content="https?:\/\/.+"/);
-      expect(html).toMatch(
-        /<meta name="twitter:card" content="summary_large_image"/
-      );
+      expect(html).toMatch(/<meta name="twitter:card" content="summary_large_image"/);
 
       // JSON-LD BlogPosting
       expect(html).toMatch(/"@type"\s*:\s*"BlogPosting"/);
